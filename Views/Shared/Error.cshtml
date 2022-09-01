@@ -1,0 +1,47 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Sistem Ralat";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<style>
+    .wrap-login {
+        padding: 42px 50px 33px 55px;
+        background: #fff;
+        border-radius: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .login-pic {
+        width: 100%;
+    }
+</style>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login animate__bounceIn">
+            <div class="login-pic text-center">
+                <h1 class="text-danger mb-4">Ralat</h1>
+                <h3 class="text-danger mb-4">Ralat berlaku ketika sistem sedang menjalani operasi.</h3>
+                @if (Model.ShowRequestId)
+                {
+                    <h6 class="mb-4">
+                        <strong>Trace ID:</strong> <code>@Model.RequestId</code>
+                    </h6>
+                }
+
+                <h3 class="mb-2">Arahan:</h3>
+                <p>
+                    Anda diminta untuk melaporkan isu ini kepada Pembangun Sistem. Sila <strong>ambil gambar</strong> paparan ini atau hantar nombor <strong>Trace Id</strong> sebagai tanda bukti ralat telah berlaku.
+                </p>
+                <p>
+                    Isu ralat ini akan dikesan melalui nombor <strong>Trace Id</strong> yang telah dipaparkan. Kerjasama anda amatlah hargai.
+                    Terima kasih.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

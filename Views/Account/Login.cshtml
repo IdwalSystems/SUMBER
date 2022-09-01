@@ -1,0 +1,64 @@
+﻿@model SUMBER.Models.Login.ViewModel.LoginViewModel
+
+@{
+    ViewData["Title"] = "Log In";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 animate__bounceIn">
+            <div class="login100-pic">
+                <img src="~/img/MainLogo_Syarikat.webp" alt="IMG">
+            </div>
+
+            <form class="login100-form validate-form animate__bounceIn" asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" role="form">
+                <h6 class="login100-form-big-title">
+                    SPMB
+                </h6>
+                <hr>
+                <span class="login100-form-title text-info">
+                    Log Masuk Pengguna
+                </span>
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                <div class="wrap-input100">
+                    <input class="input100" type="text" asp-for="Emel" placeholder="Emel">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+
+                <div class="wrap-input100">
+                    <input class="input100" type="password" asp-for="Katalaluan" placeholder="Katalaluan">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit">
+                        Log Masuk
+                    </button>
+                </div>
+
+                <div class="text-center p-t-12">
+                    <div class="custom-checkbox">
+                        <label asp-for="IngatSaya">
+                            <input asp-for="IngatSaya" />
+                            @Html.DisplayNameFor(m => m.IngatSaya)
+                        </label>
+
+                    </div>
+                    <a asp-controller="Account" asp-action="ForgotPassword" class="text-primary">Lupa Katalaluan</a>
+                </div>
+
+                <div class="text-center p-t-100">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿@using SUMBER
+@using SUMBER.Models
+@using Microsoft.AspNetCore.Identity
+@using SUMBER.Data
+@using System.Threading.Tasks
+@using SUMBER.Models.Administration;
+@using Microsoft.EntityFrameworkCore;
+@using System.Globalization;
+@using SUMBER.Infrastructure;
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject ApplicationDbContext _context;
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
