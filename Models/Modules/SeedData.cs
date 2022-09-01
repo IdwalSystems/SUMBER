@@ -21,7 +21,7 @@ namespace SUMBER.Models.Modules
                     Nama = "SuperAdmin"
                 };
 
-                IdentityResult result = userManager.CreateAsync(user, "SuperIdwalsys57#").Result;
+                IdentityResult result = userManager.CreateAsync(user, "IdwalIntern2022$").Result;
 
                 if (result.Succeeded)
                 {

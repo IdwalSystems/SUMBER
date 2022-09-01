@@ -138,7 +138,7 @@
             </div>
         </div>
         <div class="card-body" style="overflow-y: scroll;">
-            
+
             @if (User.Identity.IsAuthenticated)
             {
 
@@ -149,9 +149,16 @@
 
                         <ul class="nav flex-column l-bg-light mb-0">
                             <partial name="_SistemPartialNavbar" />
+                            <partial name="_JadualPartialNavbar" />
+                            <partial name="_DaftarPartialNavbar" />
                         </ul>
                     </div>
-                    
+
+                    <div class="form-group">
+                        <p class="text-gray font-weight-bold text-uppercase px-3 small pb-2 mb-0">Pengurusan</p>
+
+                    </div>
+
                 }
                 else if (User.IsInRole("Admin"))
                 {
@@ -163,11 +170,26 @@
                 }
                 else if (User.IsInRole("Supervisor"))
                 {
+                    <div class="form-group">
+                        <p class="text-gray font-weight-bold text-uppercase px-3 small pb-2 mb-0">Menu Utama</p>
 
+                        <ul class="nav flex-column l-bg-light mb-0">
+                            <partial name="_JadualPartialNavbar" />
+                            <partial name="_DaftarPartialNavbar" />
+                        </ul>
+                    </div>
+
+                    <div class="form-group">
+                        <p class="text-gray font-weight-bold text-uppercase px-3 small pb-2 mb-0">Pengurusan</p>
+
+                    </div>
                 }
                 else
                 {
+                    <div class="form-group">
+                        <p class="text-gray font-weight-bold text-uppercase px-3 small pb-2 mb-0">Pengurusan</p>
 
+                    </div>
                 }
             }
 
