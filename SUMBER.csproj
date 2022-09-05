@@ -31,7 +31,6 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Infrastructure\" />
-    <Folder Include="Models\Sumber\" />
     <Folder Include="Services\" />
   </ItemGroup>
 

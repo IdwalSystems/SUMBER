@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SUMBER.Models.Administration;
 using SUMBER.Models.Modules;
+using SUMBER.Models.Sumber;
 
 namespace SUMBER.Data
 {
@@ -93,6 +94,7 @@ namespace SUMBER.Data
         public DbSet<AkBankRecon> AkBankRecon { get; set; }
         public DbSet<AkBankReconPenyataBank> AkBankReconPenyataBank { get; set; }
         public DbSet<AkPadananPenyata> AkPadananPenyata { get; set; }
+        public DbSet<JSuGredGaji> JSuGredGajis { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
