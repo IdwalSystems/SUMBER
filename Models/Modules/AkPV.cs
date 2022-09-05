@@ -121,7 +121,7 @@ namespace SUMBER.Models.Modules
         public int? SuPekerjaId { get; set; }
         [Required(ErrorMessage = "Cara Bayaran Diperlukan.")]
         [DisplayName("Cara Bayaran")]
-        public int JCaraBayarId { get; set; }
+        public int? JCaraBayarId { get; set; }
         [DisplayName("Kod Kaunter Panjar")]
         public int? AkTunaiRuncitId { get; set; }
         [DisplayName("No Permohonan Aktiviti")]
