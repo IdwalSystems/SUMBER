@@ -365,6 +365,12 @@ FodyWeavers.xsd
 # database conn
 appsettings.json
 
+*.editorconfig
+*.cache
+
+bin/
+obj/
+
 # seedData
 # SeedData.cs
 /Migrations/20211221024836_AddInitialTables.cs
