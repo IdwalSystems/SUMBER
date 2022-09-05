@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ANIS\\source\\repos\\MSNK\\SUMBER\\SUMBER.csproj": {}
+    "C:\\Users\\HP\\source\\repos\\SUMBER\\SUMBER.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ANIS\\source\\repos\\MSNK\\SUMBER\\SUMBER.csproj": {
+    "C:\\Users\\HP\\source\\repos\\SUMBER\\SUMBER.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ANIS\\source\\repos\\MSNK\\SUMBER\\SUMBER.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\source\\repos\\SUMBER\\SUMBER.csproj",
         "projectName": "SUMBER",
-        "projectPath": "C:\\Users\\ANIS\\source\\repos\\MSNK\\SUMBER\\SUMBER.csproj",
-        "packagesPath": "C:\\Users\\ANIS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ANIS\\source\\repos\\MSNK\\SUMBER\\obj\\",
+        "projectPath": "C:\\Users\\HP\\source\\repos\\SUMBER\\SUMBER.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HP\\source\\repos\\SUMBER\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ANIS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
