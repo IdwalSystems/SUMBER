@@ -1,0 +1,35 @@
+﻿User Manual:
+1. Name of the Web Application
+2. General Info of the Web App.
+3. Web App Overview.
+4. Web App Summary
+ - Configuration
+ - User Access Levels
+ - Web App Modules
+  -- Module Names
+  -- Sub Module Names
+  -- Sub Module Function
+5. Authorized User of Web App.
+6. Special Instructions for Error Correction.
+7. Points of Contacts.
+8. Acronyms and Abbreviations.
+
+Developer Manual:
+1. General Information.
+ - Overview
+ - Authorized Use Permission
+ - Points of Contact
+2. Web App Summary
+ - Configuration
+ - User Access Levels
+ - Web App Modules
+  -- Module Names
+  -- Sub Module Names
+  -- Sub Module Function
+3. Steps On Creating Modules
+ - Models
+ - Controller
+ - View
+ - Special Conditions / Functions
+3. Error Correction Handling
+4. Appendix
