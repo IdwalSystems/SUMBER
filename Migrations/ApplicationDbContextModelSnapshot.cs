@@ -4873,7 +4873,7 @@ namespace SUMBER.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("JSuGredGajis");
+                    b.ToTable("JSuGredGaji");
                 });
 
             modelBuilder.Entity("SUMBER.Models.Sumber.JSuTarafJawatan", b =>

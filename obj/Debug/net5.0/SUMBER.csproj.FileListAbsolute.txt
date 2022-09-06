@@ -1624,3 +1624,8 @@ C:\Users\ANIS\source\repos\MSNK\SUMBER\obj\Debug\net5.0\refint\SUMBER.dll
 C:\Users\ANIS\source\repos\MSNK\SUMBER\obj\Debug\net5.0\SUMBER.pdb
 C:\Users\ANIS\source\repos\MSNK\SUMBER\obj\Debug\net5.0\SUMBER.genruntimeconfig.cache
 C:\Users\ANIS\source\repos\MSNK\SUMBER\obj\Debug\net5.0\ref\SUMBER.dll
+C:\Users\HP\source\repos\SUMBER\obj\Debug\net5.0\Razor\Views\JSuGredGaji\Create.cshtml.g.cs
+C:\Users\HP\source\repos\SUMBER\obj\Debug\net5.0\Razor\Views\JSuGredGaji\Delete.cshtml.g.cs
+C:\Users\HP\source\repos\SUMBER\obj\Debug\net5.0\Razor\Views\JSuGredGaji\Details.cshtml.g.cs
+C:\Users\HP\source\repos\SUMBER\obj\Debug\net5.0\Razor\Views\JSuGredGaji\Edit.cshtml.g.cs
+C:\Users\HP\source\repos\SUMBER\obj\Debug\net5.0\Razor\Views\JSuGredGaji\Index.cshtml.g.cs

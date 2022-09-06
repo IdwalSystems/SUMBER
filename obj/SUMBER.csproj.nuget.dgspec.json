@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\idwal\\source\\repos\\SUMBER\\SUMBER.csproj": {}
+    "C:\\Users\\HP\\source\\repos\\SUMBER\\SUMBER.csproj": {}
   },
   "projects": {
-    "C:\\Users\\idwal\\source\\repos\\SUMBER\\SUMBER.csproj": {
+    "C:\\Users\\HP\\source\\repos\\SUMBER\\SUMBER.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\idwal\\source\\repos\\SUMBER\\SUMBER.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\source\\repos\\SUMBER\\SUMBER.csproj",
         "projectName": "SUMBER",
-        "projectPath": "C:\\Users\\idwal\\source\\repos\\SUMBER\\SUMBER.csproj",
-        "packagesPath": "C:\\Users\\idwal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\idwal\\source\\repos\\SUMBER\\obj\\",
+        "projectPath": "C:\\Users\\HP\\source\\repos\\SUMBER\\SUMBER.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HP\\source\\repos\\SUMBER\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\idwal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -107,7 +107,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -119,7 +120,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
