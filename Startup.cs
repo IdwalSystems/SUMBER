@@ -16,8 +16,8 @@ using SUMBER.Models.Modules.EFRepository;
 using SUMBER.Models.Modules.IRepository;
 using Rotativa.AspNetCore;
 using System;
-using SUMBER.Models.Sumber;
 using SUMBER.Models.Sumber.EFRepository;
+using SUMBER.Models.Sumber;
 
 namespace SUMBER
 {
@@ -107,6 +107,7 @@ namespace SUMBER
             services.AddTransient<IRepository<JPenyemak, int, string>, JPenyemakRepository>();
             services.AddTransient<IRepository<AkPenghutang, int, string>, AkPenghutangRepository>();
             services.AddTransient<IRepository<JSuGredGaji, int, string>, JSuGredGajiRepository>();
+            services.AddTransient<IRepository<JSuTarafJawatan, int, string>, JSuTarafJawatanRepository>();
 
             //TUNAI RUNCIT
             services.AddTransient<IRepository<AkTunaiRuncit, int, string>, AkTunaiRuncitRepository>();
