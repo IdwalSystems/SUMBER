@@ -151,7 +151,7 @@ namespace SUMBER.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Kod,Perihal,FlHapus,TarHapus,SuPekerjaMasukId,UserId,TarMasuk,SuPekerjaKemaskiniId,UserIdKemaskini,TarKemaskini")] JSuTarafJawatan jSuTarafJawatan)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Kod,Perihal")] JSuTarafJawatan jSuTarafJawatan)
         {
             if (id != jSuTarafJawatan.ID)
             {
@@ -162,8 +162,29 @@ namespace SUMBER.Controllers
             {
                 try
                 {
+                    var objAsal = await _context.JSuTarafJawatan.FirstOrDefaultAsync(x => x.ID == jSuTarafJawatan.ID);
+                    var kodAsal = objAsal.Kod;
+                    var perihalAsal = objAsal.Perihal;
+                    var user = await _userManager.GetUserAsync(User);
+                    int? pekerjaId = _context.applicationUsers.Where(b => b.Id == user.Id).FirstOrDefault().SuPekerjaId;
+
+                    jSuTarafJawatan.UserId = objAsal.UserId;
+                    jSuTarafJawatan.TarMasuk = objAsal.TarMasuk;
+                    jSuTarafJawatan.SuPekerjaMasukId = objAsal.SuPekerjaMasukId;
+
+                    _context.Entry(objAsal).State = EntityState.Detached;
+
+                    jSuTarafJawatan.UserIdKemaskini = user.UserName;
+                    jSuTarafJawatan.TarKemaskini = DateTime.Now;
+                    jSuTarafJawatan.SuPekerjaKemaskiniId = pekerjaId;
+
                     _context.Update(jSuTarafJawatan);
+
+                    await AddLogAsync("Ubah", kodAsal + " -> " + jSuTarafJawatan.Kod + ", "
+                        + perihalAsal + " -> " + jSuTarafJawatan.Perihal + ", ", jSuTarafJawatan.Kod, id, 0, pekerjaId);
+
                     await _context.SaveChangesAsync();
+                    TempData[SD.Success] = "Data berjaya diubah..!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -204,12 +225,43 @@ namespace SUMBER.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var user = await _userManager.GetUserAsync(User);
+            int? pekerjaId = _context.applicationUsers.Where(b => b.Id == user.Id).FirstOrDefault().SuPekerjaId;
+
             var jSuTarafJawatan = await _context.JSuTarafJawatan.FindAsync(id);
+
+            jSuTarafJawatan.UserIdKemaskini = user.UserName;
+            jSuTarafJawatan.TarKemaskini = DateTime.Now;
+            jSuTarafJawatan.SuPekerjaKemaskiniId = pekerjaId;
+
             _context.JSuTarafJawatan.Remove(jSuTarafJawatan);
+            await AddLogAsync("Hapus", jSuTarafJawatan.Kod + " - " + jSuTarafJawatan.Perihal, jSuTarafJawatan.Kod, id, 0, pekerjaId);
             await _context.SaveChangesAsync();
+            TempData[SD.Success] = "Data berjaya dihapuskan..!";
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> RollBack(int id)
+        {
+            var obj = await _context.JSuTarafJawatan.IgnoreQueryFilters()
+                .FirstOrDefaultAsync(x => x.ID == id);
+            var user = await _userManager.GetUserAsync(User);
+            int? pekerjaId = _context.applicationUsers.Where(b => b.Id == user.Id).FirstOrDefault().SuPekerjaId;
+
+            // Batal operation
+            obj.UserIdKemaskini = user.UserName;
+            obj.TarKemaskini = DateTime.Now;
+            obj.SuPekerjaKemaskiniId = pekerjaId;
+            obj.FlHapus = 0;
+            _context.JSuTarafJawatan.Update(obj);
+
+            // Batal operation end
+            await AddLogAsync("Rollback", obj.Kod + " - " + obj.Perihal, obj.Kod, id, 0, pekerjaId);
+
+            await _context.SaveChangesAsync();
+            TempData[SD.Success] = "Data berjaya dikembalikan..!";
+            return RedirectToAction(nameof(Index));
+        }
         private bool JSuTarafJawatanExists(int id)
         {
             return _context.JSuTarafJawatan.Any(e => e.ID == id);
