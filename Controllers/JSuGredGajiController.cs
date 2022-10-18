@@ -128,11 +128,6 @@ namespace SUMBER.Controllers
             return View(gredgaji);
         }
 
-        private bool KodGredGajiExists(string kod)
-        {
-            return _context.JSuGredGaji.Any(e => e.Kod == kod);
-        }
-
         // GET: JSuGredGaji/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -141,12 +136,12 @@ namespace SUMBER.Controllers
                 return NotFound();
             }
 
-            var jSuGredGaji = await _context.JSuGredGaji.FindAsync(id);
-            if (jSuGredGaji == null)
+            var gredgaji = await _context.JSuGredGaji.FindAsync(id);
+            if (gredgaji == null)
             {
                 return NotFound();
             }
-            return View(jSuGredGaji);
+            return View(gredgaji);
         }
 
         // POST: JSuGredGaji/Edit/5
@@ -154,9 +149,9 @@ namespace SUMBER.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Kod,Perihal,FlHapus,TarHapus,SuPekerjaMasukId,UserId,TarMasuk,SuPekerjaKemaskiniId,UserIdKemaskini,TarKemaskini")] JSuGredGaji jSuGredGaji)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Kod,Perihal")] JSuGredGaji gredgaji)
         {
-            if (id != jSuGredGaji.Id)
+            if (id != gredgaji.Id)
             {
                 return NotFound();
             }
@@ -165,12 +160,33 @@ namespace SUMBER.Controllers
             {
                 try
                 {
-                    _context.Update(jSuGredGaji);
+                    var objAsal = await _context.JSuGredGaji.FirstOrDefaultAsync(x => x.Id == gredgaji.Id);
+                    var kodAsal = objAsal.Kod;
+                    var perihalAsal = objAsal.Perihal;
+                    var user = await _userManager.GetUserAsync(User);
+                    int? pekerjaId = _context.applicationUsers.Where(b => b.Id == user.Id).FirstOrDefault().SuPekerjaId;
+
+                    gredgaji.UserId = objAsal.UserId;
+                    gredgaji.TarMasuk = objAsal.TarMasuk;
+                    gredgaji.SuPekerjaMasukId = objAsal.SuPekerjaMasukId;
+
+                    _context.Entry(objAsal).State = EntityState.Detached;
+
+                    gredgaji.UserIdKemaskini = user.UserName;
+                    gredgaji.TarKemaskini = DateTime.Now;
+                    gredgaji.SuPekerjaKemaskiniId = pekerjaId;
+
+                    _context.Update(gredgaji);
+
+                    await AddLogAsync("Ubah", kodAsal + " -> " + gredgaji.Kod + ", "
+                       + perihalAsal + " -> " + gredgaji.Perihal + ", ", gredgaji.Kod, id, 0, pekerjaId);
+
                     await _context.SaveChangesAsync();
+                    TempData[SD.Success] = "Data berjaya diubah..!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!JSuGredGajiExists(jSuGredGaji.Id))
+                    if (!JSuGredGajiExists(gredgaji.Id))
                     {
                         return NotFound();
                     }
@@ -181,7 +197,7 @@ namespace SUMBER.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(jSuGredGaji);
+            return View(gredgaji);
         }
 
         // GET: JSuGredGaji/Delete/5
@@ -192,14 +208,14 @@ namespace SUMBER.Controllers
                 return NotFound();
             }
 
-            var jSuGredGaji = await _context.JSuGredGaji
+            var gredgaji = await _context.JSuGredGaji
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (jSuGredGaji == null)
+            if (gredgaji == null)
             {
                 return NotFound();
             }
 
-            return View(jSuGredGaji);
+            return View(gredgaji);
         }
 
         // POST: JSuGredGaji/Delete/5
@@ -207,15 +223,52 @@ namespace SUMBER.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var jSuGredGaji = await _context.JSuGredGaji.FindAsync(id);
-            _context.JSuGredGaji.Remove(jSuGredGaji);
+            var user = await _userManager.GetUserAsync(User);
+            int? pekerjaId = _context.applicationUsers.Where(b => b.Id == user.Id).FirstOrDefault().SuPekerjaId;
+
+            var gredgaji = await _context.JSuGredGaji.FindAsync(id);
+
+            gredgaji.UserIdKemaskini = user.UserName;
+            gredgaji.TarKemaskini = DateTime.Now;
+            gredgaji.SuPekerjaKemaskiniId = pekerjaId;
+
+            _context.JSuGredGaji.Remove(gredgaji);
+            await AddLogAsync("Hapus", gredgaji.Kod + " - " + gredgaji.Perihal, gredgaji.Kod, id, 0, pekerjaId);
             await _context.SaveChangesAsync();
+            TempData[SD.Success] = "Data berjaya dihapuskan..!";
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> RollBack(int id)
+        {
+            var obj = await _context.JSuGredGaji.IgnoreQueryFilters()
+                .FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _userManager.GetUserAsync(User);
+            int? pekerjaId = _context.applicationUsers.Where(b => b.Id == user.Id).FirstOrDefault().SuPekerjaId;
+
+            // Batal operation
+            obj.UserIdKemaskini = user.UserName;
+            obj.TarKemaskini = DateTime.Now;
+            obj.SuPekerjaKemaskiniId = pekerjaId;
+            obj.FlHapus = 0;
+            _context.JSuGredGaji.Update(obj);
+
+            // Batal operation end
+            await AddLogAsync("Rollback", obj.Kod + " - " + obj.Perihal, obj.Kod, id, 0, pekerjaId);
+
+            await _context.SaveChangesAsync();
+            TempData[SD.Success] = "Data berjaya dikembalikan..!";
             return RedirectToAction(nameof(Index));
         }
 
         private bool JSuGredGajiExists(int id)
         {
             return _context.JSuGredGaji.Any(e => e.Id == id);
+        }
+
+        private bool KodGredGajiExists(string kod)
+        {
+            return _context.JSuGredGaji.Any(e => e.Kod == kod);
         }
     }
 }
