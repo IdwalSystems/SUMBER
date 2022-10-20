@@ -1,4 +1,3 @@
-﻿
 <li class="nav-item">
     <a class="nav-link collapsed text-truncate
     @Html.ActiveClass("JBahagian") 
@@ -11,7 +10,9 @@
     @Html.ActiveClass("JSukan") 
     @Html.ActiveClass("JTahapAktiviti") 
     @Html.ActiveClass("JNegeri")
+    @Html.ActiveClass("JSuTarafJawatan")
     @Html.ActiveClass("JSuGredGaji")
+    
     " href="#submenuJadual" data-toggle="collapse" data-target="#submenuJadual"><i class="fas fa-columns pr-2
     "></i><span class="pl-1">Jadual</span></a>
     <div class="collapse" id="submenuJadual" aria-expanded="false">
@@ -74,6 +75,7 @@
             <li class="nav-item"><a class="nav-link py-1 ml-3 @Html.ActiveSideBarClass("JSukan")" asp-area="" asp-controller="JSukan" asp-action="Index"><span>Sukan</span></a></li>
             <li class="nav-item"><a class="nav-link py-1 ml-3 @Html.ActiveSideBarClass("JTahapAktiviti")" asp-area="" asp-controller="JTahapAktiviti" asp-action="Index"><span>Tahap Aktiviti</span></a></li>
             <li class="nav-item"><a class="nav-link py-1 ml-3 @Html.ActiveSideBarClass("JNegeri")" asp-area="" asp-controller="JNegeri" asp-action="Index"><span>Negeri</span></a></li>
+            <li class="nav-item"><a class="nav-link py-1 ml-3 @Html.ActiveSideBarClass("JSuTarafJawatan")" asp-area="" asp-controller="JSuTarafJawatan" asp-action="Index"><span>Taraf Jawatan</span></a></li>
             <li class="nav-item"><a class="nav-link py-1 ml-3 @Html.ActiveSideBarClass("JSuGredGaji")" asp-area="" asp-controller="JSuGredGaji" asp-action="Index"><span>Gred Gaji</span></a></li>
 
         </ul>
