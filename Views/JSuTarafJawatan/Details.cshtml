@@ -1,78 +1,41 @@
 @model SUMBER.Models.Sumber.JSuTarafJawatan
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Taraf Jawatan - Papar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<div class="card box-shadow">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-8">
+                <h5 class="text-uppercase text-dark mb-0">Taraf Jawatan - Papar</h5>
+                <span class="ac-ref"><a asp-action="Index" class="text-secondary">Indeks</a> / Papar</span>
+            </div>
+            <div class="col-4 text-right">
+                <a asp-action="Index" class="text-secondary"><i class="fas fa-times fa-2x"></i></a>
+            </div>
 
-<div>
-    <h4>JSuTarafJawatan</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Kod)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Kod)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Perihal)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Perihal)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FlHapus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FlHapus)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TarHapus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TarHapus)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SuPekerjaMasukId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SuPekerjaMasukId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TarMasuk)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TarMasuk)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SuPekerjaKemaskiniId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SuPekerjaKemaskiniId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserIdKemaskini)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserIdKemaskini)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TarKemaskini)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TarKemaskini)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+        </div>
+        <hr class="mt-2"/>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Kod)
+            <dd class="col-sm-10">
+                    @Model.Kod.ToUpper()
+            </dd>
+            <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Perihal)
+            </dt>
+            <dd class="col-sm-10">
+                    @Model.Perihal.ToUpper()
+            </dd>
+        </dl>
+
+        <hr />
+        <div class="form-group">
+            <a asp-action="Edit" asp-route-id="@Model.ID" class="btn ac-primary btn-sm">Ubah</a> 
+            <a asp-action="Index" class="btn ac-secondary btn-sm" style="width:auto">Batal</a>
+        </div>
+    </div>
 </div>
