@@ -19,7 +19,7 @@ namespace SUMBER.Models.Sumber
         [MaxLength(100)]
         public string Perihal { get; set; }
 
-        public int FlJenis { get; set; }
+        public int Jenis { get; set; }
        
         //field end
 

@@ -18,7 +18,7 @@ namespace SUMBER.Controllers
     [Authorize(Roles = "SuperAdmin,Supervisor")]
     public class JSuKodGajiController : Controller
     {
-        public const string modul = "JD014";
+        public const string modul = "JD016";
         public const string namamodul = "Jadual Kod Gaji";
 
         private readonly ApplicationDbContext _context;
@@ -109,7 +109,7 @@ namespace SUMBER.Controllers
                     kodGaji.UserId = user.UserName;
                     kodGaji.TarMasuk = DateTime.Now;
                     kodGaji.SuPekerjaMasukId = pekerjaId;
-                    kodGaji.FlJenis = FlJenis;
+                    kodGaji.Jenis = FlJenis;
 
                     _context.Add(kodGaji);
                     await AddLogAsync("Tambah", kodGaji.Kod + " - " + kodGaji.Perihal, kodGaji.Kod, 0, 0, pekerjaId);
@@ -174,7 +174,7 @@ namespace SUMBER.Controllers
                     kodGaji.UserIdKemaskini = user.UserName;
                     kodGaji.TarKemaskini = DateTime.Now;
                     kodGaji.SuPekerjaKemaskiniId = pekerjaId;
-                    kodGaji.FlJenis = FlJenis;
+                    kodGaji.Jenis = FlJenis;
 
                     _context.Update(kodGaji);
 
