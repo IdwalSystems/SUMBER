@@ -1,0 +1,55 @@
+@model SUMBER.Models.Sumber.JSuKodGaji
+
+@{
+    ViewData["Title"] = "Kod Gaji - Papar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card box-shadow">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-8">
+                <h5 class="text-uppercase text-dark mb-0">Kod Gaji - Papar</h5>
+                <span class="ac-ref"><a asp-action="Index" class="text-secondary">Indeks</a> / Papar</span>
+            </div>
+            <div class="col-4 text-right">
+                <a asp-action="Index" class="text-secondary"><i class="fas fa-times fa-2x"></i></a>
+            </div>
+
+        </div>
+        <hr class="mt-2"/>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Kod)
+            <dd class="col-sm-10">
+                    @Model.Kod.ToUpper()
+            </dd>
+            <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Perihal)
+            </dt>
+            <dd class="col-sm-10">
+                    @Model.Perihal.ToUpper()
+            </dd>
+            <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.FlJenis)
+
+            </dt>
+            <dd class="col-sm-2 text-uppercase">
+                    @if (Model.FlJenis == 0)
+                    {
+                        @Html.Label("Elaun","Elaun")
+                    }
+                    else
+                    {
+                        @Html.Label("Potongan","Potongan")
+                    }
+               
+            </dd>
+        </dl>
+        <hr />
+        <div class="form-group">
+            <a asp-action="Edit" asp-route-id="@Model.ID" class="btn ac-primary btn-sm">Ubah</a> 
+            <a asp-action="Index" class="btn ac-secondary btn-sm" style="width:auto">Batal</a>
+        </div>
+    </div>
+</div>
