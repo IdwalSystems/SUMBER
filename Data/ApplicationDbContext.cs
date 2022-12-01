@@ -96,6 +96,7 @@ namespace SUMBER.Data
         public DbSet<AkPadananPenyata> AkPadananPenyata { get; set; }
         public DbSet<JSuGredGaji> JSuGredGaji { get; set; }
         public DbSet<JSuTarafJawatan> JSuTarafJawatan { get; set; }
+        public DbSet<JSuKodGaji> JSuKodGaji { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
