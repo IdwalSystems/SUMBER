@@ -53,7 +53,7 @@
                             @Html.DisplayNameFor(model => model.Perihal)
                         </th> 
                         <th class="fljenis" width="10%">
-                            @Html.DisplayNameFor(model => model.Jenis)
+                            @Html.DisplayNameFor(model => model.FlJenis)
                         </th> 
                         <th width="5%"></th>
                     </tr> 
@@ -71,7 +71,7 @@
                                 @item.Perihal
                                 </td>
                                 <td>
-                                @if (item.Jenis == 0)
+                                @if (item.FlJenis == 0)
                                 {
                                     @Html.DisplayName("ELAUN")
                                 }

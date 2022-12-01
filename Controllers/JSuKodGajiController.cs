@@ -109,7 +109,7 @@ namespace SUMBER.Controllers
                     kodGaji.UserId = user.UserName;
                     kodGaji.TarMasuk = DateTime.Now;
                     kodGaji.SuPekerjaMasukId = pekerjaId;
-                    kodGaji.Jenis = FlJenis;
+                    kodGaji.FlJenis = FlJenis;
 
                     _context.Add(kodGaji);
                     await AddLogAsync("Tambah", kodGaji.Kod + " - " + kodGaji.Perihal, kodGaji.Kod, 0, 0, pekerjaId);
@@ -174,7 +174,7 @@ namespace SUMBER.Controllers
                     kodGaji.UserIdKemaskini = user.UserName;
                     kodGaji.TarKemaskini = DateTime.Now;
                     kodGaji.SuPekerjaKemaskiniId = pekerjaId;
-                    kodGaji.Jenis = FlJenis;
+                    kodGaji.FlJenis = FlJenis;
 
                     _context.Update(kodGaji);
 

@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace SUMBER.Models.Sumber
 {
@@ -19,8 +21,10 @@ namespace SUMBER.Models.Sumber
         [MaxLength(100)]
         public string Perihal { get; set; }
 
-        public int Jenis { get; set; }
-       
+        [DisplayName("Jenis")]
+        [DataType(DataType.Text)]
+        public int FlJenis { get; set; }
+
         //field end
 
 
