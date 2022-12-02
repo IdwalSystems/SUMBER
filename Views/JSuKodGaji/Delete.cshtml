@@ -35,14 +35,14 @@
              <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.FlJenis)
             </dt>
-            <dd class="col-sm-2 text-uppercase" >
+            <dd class="col-sm-10" >
                 @if (Model.FlJenis == 0)
                 {
-                    @Html.Label("Elaun","Elaun")
+                    @Html.DisplayName("ELAUN")
                 }
                 else
                 {
-                    @Html.Label("Potongan","Potongan")
+                    @Html.DisplayName("POTONGAN")
                 }
                 
             </dd>

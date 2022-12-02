@@ -18,7 +18,7 @@ namespace SUMBER.Controllers
     [Authorize(Roles = "SuperAdmin,Supervisor")]
     public class JSuKodGajiController : Controller
     {
-        public const string modul = "JD014";
+        public const string modul = "JD016";
         public const string namamodul = "Jadual Kod Gaji";
 
         private readonly ApplicationDbContext _context;
