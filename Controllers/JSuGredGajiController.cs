@@ -19,7 +19,7 @@ namespace SUMBER.Controllers
     [Authorize(Roles = "SuperAdmin,Supervisor")]
     public class JSuGredGajiController : Controller
     {
-        public const string modul = "JD014";
+        public const string modul = "JD015";
         public const string namamodul = "Jadual Gred Gaji";
 
         private readonly ApplicationDbContext _context;
