@@ -103,10 +103,49 @@
                             </select>
                             <span asp-validation-for="JBankId" class="text-danger"></span>
                         </div>
+
                         <div class="form-group col-md-4">
                             <label asp-for="Emel" class="control-label"></label>
                             <input asp-for="Emel" class="form-control form-control-sm" type="email" required />
                             <span asp-validation-for="Emel" class="text-danger"></span>
+                        </div> 
+                    </div>
+                    <div class="form-row">
+                         <div class="form-group col-md-4">  
+                            <label asp-for="StatusKahwin" class="control-label"></label><div></div>
+                            <input asp-for="StatusKahwin" class="radio-inline" style="margin: 10px" id="status1" name="StatusKahwin" type="radio" value="0" /> BUJANG
+                            <input asp-for="StatusKahwin" class="radio-inline" style="margin: 10px" id="status2" name="StatusKahwin" type="radio" value="1" /> KAHWIN
+                            <span asp-validation-for="StatusKahwin" class="text-danger"></span>   
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="BilAnak" class="control-label"></label>
+                            <select asp-for="BilAnak" class="form-control form-control-sm">
+                                <option value="" hidden>-- Bilangan Anak --</option>
+                                <option value="0" >0 ORANG</option>
+                                <option value="1" >1 ORANG</option>
+                                <option value="2" >2 ORANG</option>
+                                <option value="3" >3 ORANG</option>
+                                <option value="4" >4 ORANG</option>
+                                <option value="5" >5 ORANG</option>
+                                <option value="6" >6 ORANG</option>
+                                <option value="7" >7 ORANG</option>
+                                <option value="8" >8 ORANG</option>
+                                <option value="9" >9 ORANG</option>
+                                <option value="10" >10 ORANG</option>
+                                <option value="11" >LEBIH 10 ORANG</option>
+                            </select>
+                            <span asp-validation-for="BilAnak" class="text-danger"></span>
+                        </div>
+                         <div class="form-group col-md-4">
+                            <label asp-for="JSuTarafJawatanId" class="control-label"></label>
+                            <select asp-for="JSuTarafJawatanId" class="form-control form-control-sm">
+                                <option value="" hidden>-- Pilih Taraf Jawatan --</option>
+                                         @foreach (var s in ViewBag.JSuTarafJawatan)
+                                         {
+                                            <option value="@s.ID">@s.Perihal.ToUpper() </option>
+                                         }
+                            </select>
+                            <span asp-validation-for="JSuTarafJawatanId" class="text-danger"></span>
                         </div>
                     </div>
                     @*table Objek*@

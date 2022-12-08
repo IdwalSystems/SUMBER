@@ -12,6 +12,7 @@ using SUMBER.Data;
 using SUMBER.Models.Modules;
 using SUMBER.Models.Modules.Cart;
 using SUMBER.Models.Modules.IRepository;
+using SUMBER.Models.Sumber;
 
 namespace SUMBER.Controllers
 {
@@ -30,6 +31,7 @@ namespace SUMBER.Controllers
         private readonly IRepository<JBangsa, int, string> _jBangsaRepo;
         private readonly ListViewIRepository<SuTanggunganPekerja, int> _suTanggunganRepo;
         private readonly IRepository<JCaraBayar, int, string> _jCaraBayarRepo;
+        private readonly IRepository<JSuTarafJawatan, int, string> _jSuTarafJawatanRepo;
         private CartPekerja _cart;
 
         public SuPekerjaController(
@@ -42,6 +44,7 @@ namespace SUMBER.Controllers
             IRepository<JBangsa, int, string> jBangsaRepo,
             ListViewIRepository<SuTanggunganPekerja, int> suTanggunganRepo,
             IRepository<JCaraBayar, int, string> jCaraBayarRepo,
+            IRepository<JSuTarafJawatan, int, string> jSuTarafJawatanRepo,
             CartPekerja cart
             )
         {
@@ -54,6 +57,7 @@ namespace SUMBER.Controllers
             _jBangsaRepo = jBangsaRepo;
             _suTanggunganRepo = suTanggunganRepo;
             _jCaraBayarRepo = jCaraBayarRepo;
+            _jSuTarafJawatanRepo = jSuTarafJawatanRepo;
             _cart = cart;
         }
 
@@ -95,6 +99,8 @@ namespace SUMBER.Controllers
             List<JCaraBayar> JCaraBayarList = _context.JCaraBayar.OrderBy(b => b.Kod).ToList();
             ViewBag.JCaraBayar = JCaraBayarList;
 
+            List<JSuTarafJawatan> JSuTarafJawatanList = _context.JSuTarafJawatan.OrderBy(b => b.Kod).ToList();
+            ViewBag.JSuTarafJawatan = JSuTarafJawatanList;
         }
 
         private string GetNoGaji()
@@ -233,8 +239,8 @@ namespace SUMBER.Controllers
                                     //m.TelefonRumah = suPekerja.TelefonRumah;
                                     //m.TelefonBimbit = suPekerja.TelefonBimbit;
                                     m.Emel = suPekerja.Emel;
-                                    //m.StatusKahwin = suPekerja.StatusKahwin;
-                                    //m.BilAnak = suPekerja.BilAnak;
+                                    m.StatusKahwin = suPekerja.StatusKahwin;
+                                    m.BilAnak = suPekerja.BilAnak;
                                     //m.GajiPokok = suPekerja.GajiPokok;
                                     //m.TarikhMasukKerja = suPekerja.TarikhMasukKerja;
                                     //m.TarikhBerhentiKerja = suPekerja.TarikhBerhentiKerja;
@@ -242,6 +248,7 @@ namespace SUMBER.Controllers
                                     //m.JAgamaId = suPekerja.JAgamaId;
                                     //m.JBangsaId = suPekerja.JBangsaId;
                                     //m.JCaraBayarId = suPekerja.JCaraBayarId;
+                                    //m.JSuTarafJawatan = suPekerja.JSuTarafJawatan;
                                     m.NoAkaunBank = suPekerja.NoAkaunBank;
                                     m.UserId = username;
                                     m.TarMasuk = DateTime.Now;

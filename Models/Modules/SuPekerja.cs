@@ -1,4 +1,5 @@
 ﻿using SUMBER.Models.Helper;
+using SUMBER.Models.Sumber;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -63,6 +64,8 @@ namespace SUMBER.Models.Modules
         [DisplayName("No Akaun Bank")]
         public string NoAkaunBank { get; set; }
         public bool IsAdmin { get; set; }
+        [DisplayName("Taraf Jawatan")]
+        public int JSuTarafJawatanId { get; set; }
 
         //relationship
         [DisplayName("Negeri")]
@@ -73,6 +76,7 @@ namespace SUMBER.Models.Modules
         public JBank JBank { get; set; }
         [DisplayName("Bangsa")]
         public JBangsa JBangsa { get; set; }
+       
         public ICollection<SuTanggunganPekerja> SuTanggungan { get; set; }
         [DisplayName("Cara Bayar")]
         public JCaraBayar JCaraBayar { get; set; }
@@ -85,6 +89,7 @@ namespace SUMBER.Models.Modules
         public ICollection<AkCimbEFT1> AkCimbEFT1 { get; set; }
         public ICollection<AkPenyataPemungut> AkPenyataPemungut { get; set; }
         public ICollection<AkPVGanda> AkPVGanda { get; set; }
+        public ICollection<JSuTarafJawatan> JSuTarafJawatan { get; set; }
         //relationship end
 
         //soft delete
