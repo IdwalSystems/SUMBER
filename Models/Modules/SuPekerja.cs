@@ -36,6 +36,9 @@ namespace SUMBER.Models.Modules
         [Required(ErrorMessage = "Emel Diperlukan")]
         [EmailAddress(ErrorMessage = "Emel Tidak Sah."), MaxLength(100)]
         public string Emel { get; set; }
+        // note:
+        // StatusKahwin = 0 : Bujang
+        // StatusKahwin = 1 : Kahwin
         [DefaultValue("0")]
         [DisplayName("Status Perkahwinan")]
         public int StatusKahwin { get; set; }
