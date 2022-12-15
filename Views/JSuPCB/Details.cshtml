@@ -1,0 +1,69 @@
+@model SUMBER.Models.Sumber.JSuPCB
+
+@{
+    ViewData["Title"] = "PCB - Papar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card box-shadow">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-8">
+                <h5 class="text-uppercase text-dark mb-0">PCB - Papar</h5>
+                <span class="ac-ref"><a asp-action="Index" class="text-secondary">Indeks</a> / Papar</span>
+            </div>
+            <div class="col-4 text-right">
+                <a asp-action="Index" class="text-secondary"><i class="fas fa-times fa-2x"></i></a>
+            </div>
+
+        </div>
+        <hr class="mt-2"/>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.GajiAwal)
+            <dd class="col-sm-10">
+                    @Model.GajiAwal
+            </dd>
+            <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.GajiAkhir)
+            </dt>
+            <dd class="col-sm-10">
+                    @Model.GajiAkhir
+            </dd>
+            <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.FlKategori)
+            </dt>
+            <dd class="col-sm-10" >
+                    @if (Model.FlKategori == 0)
+                    {
+                        @Html.DisplayName("BUJANG")
+                    }
+                    else if (Model.FlKategori == 1)
+                    {
+                        @Html.DisplayName("KAHWIN & ISTERI/SUAMI TIDAK BEKERJA")
+                    }
+                    else if (Model.FlKategori == 2)
+                    {
+                        @Html.DisplayName("KAHWIN & ISTERI/SUAMI BEKERJA")
+                    }
+            </dd>
+            <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Bujang)
+            </dt>
+            <dd class="col-sm-10">
+                    @Model.Bujang
+            </dd>
+            <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Kahwin)
+            </dt>
+            <dd class="col-sm-10">
+                    @Model.Kahwin
+            </dd>
+        </dl>
+        <hr />
+        <div class="form-group">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn ac-primary btn-sm">Ubah</a> 
+            <a asp-action="Index" class="btn ac-secondary btn-sm" style="width:auto">Batal</a>
+        </div>
+    </div>
+</div>
