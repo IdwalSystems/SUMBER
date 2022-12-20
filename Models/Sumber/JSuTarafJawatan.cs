@@ -1,4 +1,5 @@
 ﻿using SUMBER.Models.Helper;
+using SUMBER.Models.Modules;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,8 @@ namespace SUMBER.Models.Sumber
         [MaxLength(100)]
         public string Perihal { get; set; }
         //field end
+
+        public ICollection<SuPekerja> SuPekerja { get; set; }
 
         public int FlHapus { get; set; }
         public DateTime? TarHapus { get ; set; }

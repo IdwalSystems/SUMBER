@@ -3,36 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SUMBER.Data;
 
 namespace SUMBER.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221205040315_addTableJSuPCB")]
+    partial class addTableJSuPCB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("JSuTarafJawatanSuPekerja", b =>
-                {
-                    b.Property<int>("JSuTarafJawatanID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SuPekerjaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("JSuTarafJawatanID", "SuPekerjaId");
-
-                    b.HasIndex("SuPekerjaId");
-
-                    b.ToTable("JSuTarafJawatanSuPekerja");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -4612,9 +4599,6 @@ namespace SUMBER.Migrations
                     b.Property<int>("JNegeriId")
                         .HasColumnType("int");
 
-                    b.Property<int>("JSuTarafJawatanId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Jawatan")
                         .HasColumnType("nvarchar(max)");
 
@@ -4963,6 +4947,7 @@ namespace SUMBER.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("GajiAwal")
+                        .HasMaxLength(2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Kahwin")
@@ -5056,21 +5041,6 @@ namespace SUMBER.Migrations
                     b.HasIndex("SuPekerjaId");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
-            modelBuilder.Entity("JSuTarafJawatanSuPekerja", b =>
-                {
-                    b.HasOne("SUMBER.Models.Sumber.JSuTarafJawatan", null)
-                        .WithMany()
-                        .HasForeignKey("JSuTarafJawatanID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SUMBER.Models.Modules.SuPekerja", null)
-                        .WithMany()
-                        .HasForeignKey("SuPekerjaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

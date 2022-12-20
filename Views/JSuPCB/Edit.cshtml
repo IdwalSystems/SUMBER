@@ -1,0 +1,67 @@
+@model SUMBER.Models.Sumber.JSuPCB
+
+@{
+    ViewData["Title"] = "PCB - Ubah";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="_JSEdit" />
+
+<div class="card box-shadow">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-8">
+                <h5 class="text-uppercase text-primary mb-0">PCB - Ubah</h5>
+                <span class="ac-ref"><a asp-action="Index" class="text-secondary">Indeks</a> / <a asp-action="Details" asp-route-id="@Model.Id" class="text-secondary">Papar</a> / Ubah</span>
+            </div>
+            <div class="col-4 text-right">
+                <a asp-action="Index" class="text-secondary"><i class="fas fa-times fa-2x"></i></a>
+            </div>
+
+        </div>
+        <hr class="mt-2"/>
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="GajiAwal" class="control-label"></label>
+                <input asp-for="GajiAwal" class="form-control form-control-sm"/>
+                <span asp-validation-for="GajiAwal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GajiAkhir" class="control-label"></label>
+                <input asp-for="GajiAkhir" class="form-control form-control-sm text-uppercase"  />
+                <span asp-validation-for="GajiAkhir" class="text-danger"></span>
+            </div>
+            <div class="form-group">  
+                <label asp-for="FlKategori" class="control-label"></label><div></div>
+                <input asp-for="FlKategori" class="radio-inline" id="kategori1" onclick="RadioButton('bujang')" name="FlKategori" type="radio" value="0" /> BUJANG
+                <input asp-for="FlKategori" class="radio-inline" id="kategori2" onclick="RadioButton('kahwin')" name="FlKategori" type="radio" value="1" /> KAHWIN & JIKA ISTERI/SUAMI TIDAK BEKERJA
+                <input asp-for="FlKategori" class="radio-inline" id="kategori3" onclick="RadioButton('kahwin')" name="FlKategori" type="radio" value="2" /> KAHWIN & JIKA ISTERI/SUAMI BEKERJA
+                <span asp-validation-for="FlKategori" class="text-danger"></span> 
+            </div>
+             <div class="form-group">
+                <label asp-for="Bujang" class="control-label"></label>
+                <input asp-for="Bujang" class="form-control form-control-sm text-uppercase" id="bujang" />
+                <span asp-validation-for="Bujang" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Kahwin" class="control-label"></label>
+                <input asp-for="Kahwin" class="form-control form-control-sm text-uppercase" id="kahwin" />
+                <span asp-validation-for="Kahwin" class="text-danger"></span>
+            </div>
+            <hr />
+            <div class="form-group">
+                <input type="submit" value="Simpan" class="btn ac-primary btn-sm" />
+                <a asp-action="Index" class="btn ac-secondary btn-sm" style="width:auto">Batal</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
