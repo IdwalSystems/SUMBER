@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SUMBER.Migrations
 {
-    public partial class addTableSuGaji : Migration
+    public partial class addTableSuProfilGaji : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "SuGaji",
+                name: "SuProfilGaji",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -27,15 +27,15 @@ namespace SUMBER.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SuGaji", x => x.Id);
+                    table.PrimaryKey("PK_SuProfilGaji", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SuGaji_JSuKodGaji_JSuKodGajiId",
+                        name: "FK_SuProfilGaji_JSuKodGaji_JSuKodGajiId",
                         column: x => x.JSuKodGajiId,
                         principalTable: "JSuKodGaji",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SuGaji_SuPekerja_SuPekerjaId",
+                        name: "FK_SuProfilGaji_SuPekerja_SuPekerjaId",
                         column: x => x.SuPekerjaId,
                         principalTable: "SuPekerja",
                         principalColumn: "Id",
@@ -43,20 +43,20 @@ namespace SUMBER.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_SuGaji_JSuKodGajiId",
-                table: "SuGaji",
+                name: "IX_SuProfilGaji_JSuKodGajiId",
+                table: "SuProfilGaji",
                 column: "JSuKodGajiId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SuGaji_SuPekerjaId",
-                table: "SuGaji",
+                name: "IX_SuProfilGaji_SuPekerjaId",
+                table: "SuProfilGaji",
                 column: "SuPekerjaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SuGaji");
+                name: "SuProfilGaji");
         }
     }
 }

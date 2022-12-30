@@ -10,8 +10,8 @@ using SUMBER.Data;
 namespace SUMBER.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221229070932_addTableSuGaji")]
-    partial class addTableSuGaji
+    [Migration("20221230073505_addTableSuProfilGaji")]
+    partial class addTableSuProfilGaji
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -5090,7 +5090,7 @@ namespace SUMBER.Migrations
                     b.ToTable("JSuTarafJawatan");
                 });
 
-            modelBuilder.Entity("SUMBER.Models.Sumber.SuGaji", b =>
+            modelBuilder.Entity("SUMBER.Models.Sumber.SuProfilGaji", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -5136,7 +5136,7 @@ namespace SUMBER.Migrations
 
                     b.HasIndex("SuPekerjaId");
 
-                    b.ToTable("SuGaji");
+                    b.ToTable("SuProfilGaji");
                 });
 
             modelBuilder.Entity("SUMBER.Models.Administration.ApplicationUser", b =>
@@ -6763,7 +6763,7 @@ namespace SUMBER.Migrations
                     b.Navigation("SuPekerja");
                 });
 
-            modelBuilder.Entity("SUMBER.Models.Sumber.SuGaji", b =>
+            modelBuilder.Entity("SUMBER.Models.Sumber.SuProfilGaji", b =>
                 {
                     b.HasOne("SUMBER.Models.Sumber.JSuKodGaji", "JSuKodGaji")
                         .WithMany()
