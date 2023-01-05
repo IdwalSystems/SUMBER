@@ -18,25 +18,27 @@ namespace SUMBER.Models.Modules.Cart.Session
         }
         private ISession Session { get; set; }
 
-        //Belian1
+        //Waran1
         public override void AddItem1(
             int abWaranId,
             decimal amaun,
             int akCartaId,
+            int? jBahagianId,
             string tk
            )
         {
             base.AddItem1(abWaranId,
                           amaun,
                           akCartaId,
+                          jBahagianId,
                           tk);
 
             Session.SetJson("CartWaran", this);
         }
 
-        public override void RemoveItem1(int id)
+        public override void RemoveItem1(int id, int id2)
         {
-            base.RemoveItem1(id);
+            base.RemoveItem1(id, id2);
             Session.SetJson("CartWaran", this);
         }
         public override void Clear1()
@@ -44,6 +46,6 @@ namespace SUMBER.Models.Modules.Cart.Session
             base.Clear1();
             Session.Remove("CartWaran");
         }
-        //Belian1 End
+        //Waran1 End
     }
 }

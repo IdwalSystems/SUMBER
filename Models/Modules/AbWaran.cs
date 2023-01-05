@@ -29,8 +29,13 @@ namespace SUMBER.Models.Modules
 
         //flag
         // WPA = 0(asal); WPT = 1 (tambah/tarik balik); WPP = 2(pindah);
+        [DisplayName("Jenis Waran")]
         public int FlJenisWaran { get; set; }
-        [DisplayName("Status Batal")]
+        //flag
+        // Dalam Bahagian = 0; Antara Bahagian = 1;
+        [DisplayName("Jenis Pindahan")]
+        public int FlJenisPindahan { get; set; }
+        [DisplayName("Hapus")]
         [DefaultValue("0")]
         public int FlHapus { get; set; }
         public DateTime? TarHapus { get; set; }
@@ -46,10 +51,9 @@ namespace SUMBER.Models.Modules
         [Required(ErrorMessage = "Kumpulan Wang Diperlukan")]
         [DisplayName("Kumpulan Wang")]
         public int JKWId { get; set; }
-        public JKW JKW {get;set;}
-        [Required(ErrorMessage = "Bahagian diperlukan")]
+        public JKW JKW { get; set; }
         [DisplayName("Bahagian")]
-        public int JBahagianId { get; set; }
+        public int? JBahagianId { get; set; }
         public JBahagian JBahagian { get; set; }
         public ICollection<AbWaran1> AbWaran1 { get; set; }
         //relationship end
