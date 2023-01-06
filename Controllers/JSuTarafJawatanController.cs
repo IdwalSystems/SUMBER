@@ -151,7 +151,7 @@ namespace SUMBER.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Kod,Perihal")] JSuTarafJawatan jSuTarafJawatan)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Kod,Perihal")] JSuTarafJawatan jSuTarafJawatan)
         {
             if (id != jSuTarafJawatan.ID)
             {

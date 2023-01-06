@@ -5088,6 +5088,61 @@ namespace SUMBER.Migrations
                     b.ToTable("JSuTarafJawatan");
                 });
 
+            modelBuilder.Entity("SUMBER.Models.Sumber.SuProfilGaji", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Elaun")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("FlHapus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FlKWSP")
+                        .HasColumnType("int");
+
+                    b.Property<int>("JSuKodGajiId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Potongan")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("SuPekerjaId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SuPekerjaKemaskiniId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SuPekerjaMasukId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("TarHapus")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("TarKemaskini")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("TarMasuk")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserIdKemaskini")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JSuKodGajiId");
+
+                    b.HasIndex("SuPekerjaId");
+
+                    b.ToTable("SuProfilGaji");
+                });
+
             modelBuilder.Entity("SUMBER.Models.Administration.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -6708,6 +6763,25 @@ namespace SUMBER.Migrations
                         .HasForeignKey("SuPekerjaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("SuPekerja");
+                });
+
+            modelBuilder.Entity("SUMBER.Models.Sumber.SuProfilGaji", b =>
+                {
+                    b.HasOne("SUMBER.Models.Sumber.JSuKodGaji", "JSuKodGaji")
+                        .WithMany()
+                        .HasForeignKey("JSuKodGajiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SUMBER.Models.Modules.SuPekerja", "SuPekerja")
+                        .WithMany()
+                        .HasForeignKey("SuPekerjaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("JSuKodGaji");
 
                     b.Navigation("SuPekerja");
                 });
