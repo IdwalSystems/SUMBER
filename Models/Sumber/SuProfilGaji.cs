@@ -14,13 +14,19 @@ namespace SUMBER.Models.Sumber
         public int Id { get; set; }
         [DisplayName("Anggota")]
         public int SuPekerjaId { get; set; }
-
         [DisplayName("Kod Gaji")]
         public int JSuKodGajiId { get; set; }
-
-        [DisplayName("Amaun")]
+        [DisplayName("Elaun")]
         [Column(TypeName = "decimal(18, 2)")]
-        public decimal Amaun { get; set; }
+        public decimal Elaun { get; set; }
+        [DisplayName("Potongan")]
+        [Column(TypeName = "decimal(18, 2)")]
+        public decimal Potongan { get; set; }
+        // note:
+        // FlKWSP = 0 : Tidak
+        // FlKWSP = 1 : Ya
+        [DisplayName("KWSP")]
+        public int FlKWSP { get; set; }
 
         //field end
 
