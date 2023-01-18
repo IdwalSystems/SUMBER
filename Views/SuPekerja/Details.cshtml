@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<partial name="_JSDetails" />
 <div class="card box-shadow">
     <div class="card-body">
         <div class="row">
@@ -70,6 +71,64 @@
                         <input class="form-control form-control-sm" value="@Html.DisplayFor(model => model.JNegeri.Perihal)" readonly />
                     </div>
                 </div>
+
+                @*table Objek*@
+        <div class="card box-shadow mb-3 mt-3">
+            <div class="card-header">
+                <h6>Elaun Potongan</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+
+                    <table id="tblObjek" class="table table-sm" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th hidden>Id</th>
+                                <th style="width:40%%">Kod Perihalan</th>
+                                <th style="width:40%%">Elaun RM</th>
+                                <th style="width:40%%">Potongan RM</th>
+                                <th style="width:40%%">KWSP</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyObjek">
+
+                                    @foreach (var item in ViewBag.SuProfilGaji)
+                                    {
+                                        <tr id="@item.Id">
+                                        <td id="JSuKodGajiId" hidden>@item.JSuKodGajiId</td>
+                                        <td>@item.JSuKodGaji</td>
+                                        <td id="SuPekerjaId" hidden>@item.SuPekerjaId</td>
+                                        <td>@item.Elaun</td>
+                                        <td id="SuPekerjaId" hidden>@item.SuPekerjaId</td>
+                                        <td>@item.Potongan</td>
+                                        <td id="SuPekerjaId" hidden>@item.SuPekerjaId</td>
+                                        <td>
+                                                @if (item.FlKWSP == 0)
+                                                {
+                                                    @Html.DisplayName("TIDAK")
+                                                }
+                                                else
+                                                {
+                                                    @Html.DisplayName("YA")
+                                                }
+                                    </td>
+
+                                    </tr>
+                                    }
+                        </tbody>
+                        <tfoot>
+
+                        </tfoot>
+                    </table>
+
+                     </div>
+                </div>
+            </div>
+        </div>
+            @*table Objek end*@
+
+
+
                 <div class="form-row" hidden>
                     <div class="form-group col-md">
                         <label asp-for="JAgama" class="control-label"></label>
@@ -191,7 +250,8 @@
                 </div>
             </div>
         </div>
-        
+
+       
         <hr />
         <div class="form-group">
             <a asp-action="Edit" asp-route-id="@Model.Id" class="btn ac-primary btn-sm">Ubah</a> 

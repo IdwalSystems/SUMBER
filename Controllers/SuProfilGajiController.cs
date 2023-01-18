@@ -133,7 +133,6 @@ namespace SUMBER.Controllers
 
                     suProfilGaji.SuPekerjaId = SuPekerjaId;
                     suProfilGaji.JSuKodGajiId = JSuKodGajiId;
-                    suProfilGaji.Amaun = Amaun;
                     suProfilGaji.UserId = user.UserName;
                     suProfilGaji.TarMasuk = DateTime.Now;
                     suProfilGaji.SuPekerjaMasukId = pekerjaId;
@@ -194,7 +193,6 @@ namespace SUMBER.Controllers
                     var objAsal = await _context.SuProfilGaji.FirstOrDefaultAsync(x => x.Id == suProfilGaji.Id);
                     var SuPekerjaIdAsal = objAsal.SuPekerjaId;
                     var JSuKodGajiIdAsal = objAsal.JSuKodGajiId;
-                    var AmaunAsal = objAsal.Amaun;
                     var user = await _userManager.GetUserAsync(User);
                     int? pekerjaId = _context.applicationUsers.Where(b => b.Id == user.Id).FirstOrDefault().SuPekerjaId;
 
@@ -212,7 +210,7 @@ namespace SUMBER.Controllers
 
                     await AddLogAsync("Ubah", SuPekerjaIdAsal + " -> " + suProfilGaji.SuPekerjaId + ", "
                         + JSuKodGajiIdAsal + " -> " + suProfilGaji.JSuKodGajiId + ", "
-                        + AmaunAsal + " -> " + suProfilGaji.Amaun + ", ", "", id, 0, pekerjaId);
+                        + ", ", "", id, 0, pekerjaId);
 
                     await _context.SaveChangesAsync();
                     TempData[SD.Success] = "Data berjaya diubah..!";

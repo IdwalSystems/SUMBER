@@ -14,7 +14,7 @@ namespace SUMBER.Models.Sumber
         //field
         public int ID { get; set; }
         [Required]
-        [MaxLength(2)]
+        [MaxLength(4)]
 
         public string Kod { get; set; }
         [Required]

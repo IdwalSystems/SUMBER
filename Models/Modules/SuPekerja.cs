@@ -93,6 +93,7 @@ namespace SUMBER.Models.Modules
         public ICollection<AkPenyataPemungut> AkPenyataPemungut { get; set; }
         public ICollection<AkPVGanda> AkPVGanda { get; set; }
         public ICollection<JSuTarafJawatan> JSuTarafJawatan { get; set; }
+        public ICollection<SuProfilGaji> SuProfilGaji { get; set; }
         //relationship end
 
         //soft delete

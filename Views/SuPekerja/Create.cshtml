@@ -111,12 +111,27 @@
                         </div> 
                     </div>
                     <div class="form-row">
-                         <div class="form-group col-md-4">  
-                            <label asp-for="StatusKahwin" class="control-label"></label><div></div>
-                            <input asp-for="StatusKahwin" class="radio-inline" style="margin: 10px" id="status1" name="StatusKahwin" type="radio" value="0" /> BUJANG
-                            <input asp-for="StatusKahwin" class="radio-inline" style="margin: 10px" id="status2" name="StatusKahwin" type="radio" value="1" /> KAHWIN
-                            <span asp-validation-for="StatusKahwin" class="text-danger"></span>   
+                       <div class="card mb-2 mt-2 col-md-4">
+                        <div class="card-body pb-1 pt-1">
+                            <div class="form-group mb-0 mt-1">
+                                <label class="control-label">Status Kahwin</label>
+                            </div>
+                         <div class="form-row ml-1">
+                         <div class="custom-control custom-radio col-md-4">  
+                            <input asp-for="StatusKahwin" class="radio-inline" id="status1" name="StatusKahwin" type="radio" value="0" checked/>
+                            <label class="label" for="StatusKahwin">
+                                        Bujang
+                                    </label>
+                            </div>
+                            <div class="custom-control custom-radio col-md-4">
+                            <input asp-for="StatusKahwin" class="radio-inline" id="status2" name="StatusKahwin" type="radio" value="1" />
+                            <label class="label" for="StatusKahwin">
+                                        Kahwin
+                                    </label>
                         </div>
+                        </div>
+                        </div>
+                    </div>
                         <div class="form-group col-md-4">
                             <label asp-for="BilAnak" class="control-label"></label>
                             <select asp-for="BilAnak" class="form-control form-control-sm">

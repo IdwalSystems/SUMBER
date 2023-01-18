@@ -11,11 +11,11 @@ namespace SUMBER.Models.Sumber
     {
         public int Id { get; set; }
 
-        [DisplayName("Gaji Awal")]
+        [DisplayName("Gaji Awal RM")]
         [Column(TypeName = "decimal(18,2)")]
         public decimal GajiAwal { get; set; }
 
-        [DisplayName("Gaji Akhir")]
+        [DisplayName("Gaji Akhir RM")]
         [Column(TypeName = "decimal(18,2)")]
         public decimal GajiAkhir { get; set; }
         // note:
@@ -26,11 +26,11 @@ namespace SUMBER.Models.Sumber
         [DataType(DataType.Text)]
         public int FlKategori { get; set; }
 
-        [DisplayName("Potongan Bujang")]
+        [DisplayName("Potongan Bujang RM")]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Bujang { get; set; }
 
-        [DisplayName("Potongan Kahwin")]
+        [DisplayName("Potongan Kahwin RM")]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Kahwin { get; set; }
 

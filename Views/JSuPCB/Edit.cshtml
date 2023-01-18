@@ -22,32 +22,54 @@
         <hr class="mt-2"/>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <div class="form-group">
+                    <div class="card mb-2">
+                        <div class="card-body pb-1 pt-1"> 
+                           <div class="form-group mb-0 mt-1">
+                                <label class="control-label">Kategori</label>
+                            </div>
+                            <div class="form-row ml-2">
+                                <div class="custom-control custom-radio col-md-2 ">
+                                    <input asp-for="FlKategori" class="radio-inline" id="kategori1" onclick="RadioButton('bujang')" name="FlKategori" type="radio" value="0" /> 
+                                   <label class="label" for="FlKategori">
+                                        Bujang
+                                    </label>
+                            </div>
+                                <div class="custom-control custom-radio col-md-4">
+                                    <input asp-for="FlKategori" class="radio-inline" id="kategori2" onclick="RadioButton('kahwin')" name="FlKategori" type="radio" value="1" />
+                                     <label class="label" for="FlKategori">
+                                        Kahwin & Jika Isteri/Suami Tidak Bekerja
+                                    </label>   
+                                </div>
+                                <div class="custom-control custom-radio col-md-4">
+                                     <input asp-for="FlKategori" class="radio-inline" id="kategori3" onclick="RadioButton('kahwin')" name="FlKategori" type="radio" value="2" /> 
+                                     <label class="label" for="FlKategori">
+                                        Kahwin & Jika Isteri/Suami Bekerja
+                                    </label>   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="GajiAwal" class="control-label"></label>
-                <input asp-for="GajiAwal" class="form-control form-control-sm"/>
+                <input asp-for="GajiAwal" class="form-control form-control-sm" type="number" min="0.00" max="999999999999999999.00" step="0.01"/>
                 <span asp-validation-for="GajiAwal" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GajiAkhir" class="control-label"></label>
-                <input asp-for="GajiAkhir" class="form-control form-control-sm text-uppercase"  />
+                <input asp-for="GajiAkhir" class="form-control form-control-sm" type="number" min="0.00" max="999999999999999999.00" step="0.01"  />
                 <span asp-validation-for="GajiAkhir" class="text-danger"></span>
-            </div>
-            <div class="form-group">  
-                <label asp-for="FlKategori" class="control-label"></label><div></div>
-                <input asp-for="FlKategori" class="radio-inline" id="kategori1" onclick="RadioButton('bujang')" name="FlKategori" type="radio" value="0" /> BUJANG
-                <input asp-for="FlKategori" class="radio-inline" id="kategori2" onclick="RadioButton('kahwin')" name="FlKategori" type="radio" value="1" /> KAHWIN & JIKA ISTERI/SUAMI TIDAK BEKERJA
-                <input asp-for="FlKategori" class="radio-inline" id="kategori3" onclick="RadioButton('kahwin')" name="FlKategori" type="radio" value="2" /> KAHWIN & JIKA ISTERI/SUAMI BEKERJA
-                <span asp-validation-for="FlKategori" class="text-danger"></span> 
             </div>
              <div class="form-group">
                 <label asp-for="Bujang" class="control-label"></label>
-                <input asp-for="Bujang" class="form-control form-control-sm text-uppercase" id="bujang" />
+                <input asp-for="Bujang" class="form-control form-control-sm" id="bujang" type="number" min="0.00" max="999999999999999999.00" step="0.01" />
                 <span asp-validation-for="Bujang" class="text-danger"></span>
             </div>
              <div class="form-group">
                 <label asp-for="Kahwin" class="control-label"></label>
-                <input asp-for="Kahwin" class="form-control form-control-sm text-uppercase" id="kahwin" />
+                <input asp-for="Kahwin" class="form-control form-control-sm" id="kahwin" type="number" min="0.00" max="999999999999999999.00" step="0.01" />
                 <span asp-validation-for="Kahwin" class="text-danger"></span>
             </div>
             <hr />
