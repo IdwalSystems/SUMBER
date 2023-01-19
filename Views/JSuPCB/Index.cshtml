@@ -28,9 +28,9 @@
                         <div class="col-sm-2 mb-2">
                             <select class="custom-select form-control-sm" id="columnSearch">
                                 <option value="" selected>Semua</option>
+                                <option value=".flkategori">Kategori</option>
                                 <option value=".gajiAwal">Gaji Awal</option>
                                 <option value=".gajiAkhir">Gaji Akhir</option>
-                                <option value=".flkategori">Kategori</option>
                             </select>
                         </div>
                         <div class="col-sm-8 mb-2">
@@ -46,15 +46,15 @@
                 <thead>
                     <tr>
                         <th width="5%">Bil</th>
+                         <th class="flkategori">
+                            @Html.DisplayNameFor(model => model.FlKategori)
+                        </th>
                         <th class="gajiAwal" width="15%"> 
                             @Html.DisplayNameFor(model => model.GajiAwal)
                         </th>
                         <th class="gajiAkhir" width="15%">
                             @Html.DisplayNameFor(model => model.GajiAkhir)
-                        </th> 
-                        <th class="flkategori">
-                            @Html.DisplayNameFor(model => model.FlKategori)
-                        </th> 
+                        </th>  
                         <th class="bujang">
                             @Html.DisplayNameFor(model => model.Bujang)
                         </th> 
@@ -69,14 +69,8 @@
                     {
                         var tabletype = item.FlHapus == 1 ? "table-danger" : null;
                                 <tr class="@tabletype text-uppercase">
-                                    <td></td>
-                                    <td>
-                                @Html.DisplayFor(modelItem => item.GajiAwal)
-                                    </td>
-                                    <td>
-                                @item.GajiAkhir
-                                    </td>
-                                    <td>
+                                <td></td>
+                                <td>
                                 @if (item.FlKategori == 0)
                                 {
                                     @Html.DisplayName("BUJANG")
@@ -89,6 +83,12 @@
                                 {
                                     @Html.DisplayName("KAHWIN & ISTERI/SUAMI BEKERJA")
                                 }
+                                        </td>
+                                    <td>
+                                @Html.DisplayFor(modelItem => item.GajiAwal)
+                                    </td>
+                                    <td>
+                                @item.GajiAkhir
                                     </td>
                                         <td>
                                 @item.Bujang

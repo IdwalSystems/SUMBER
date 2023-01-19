@@ -19,6 +19,23 @@
         </div>
         <hr class="mt-2"/>
         <dl class="row">
+             <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FlKategori)
+            </dt>
+            <dd class="col-sm-10" >
+                @if (Model.FlKategori == 0)
+                {
+                    @Html.DisplayName("BUJANG")
+                }
+                else if (Model.FlKategori == 1)
+                {
+                    @Html.DisplayName("KAHWIN & ISTERI/SUAMI TIDAK BEKERJA")
+                }
+                else if (Model.FlKategori == 2)
+                {
+                    @Html.DisplayName("KAHWIN & ISTERI/SUAMI BEKERJA")
+                }
+            </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.GajiAwal)
             <dd class="col-sm-10">
@@ -29,24 +46,7 @@
             </dt>
             <dd class="col-sm-10">
                     @Model.GajiAkhir
-            </dd>
-            <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.FlKategori)
-            </dt>
-            <dd class="col-sm-10" >
-                    @if (Model.FlKategori == 0)
-                    {
-                        @Html.DisplayName("BUJANG")
-                    }
-                    else if (Model.FlKategori == 1)
-                    {
-                        @Html.DisplayName("KAHWIN & ISTERI/SUAMI TIDAK BEKERJA")
-                    }
-                    else if (Model.FlKategori == 2)
-                    {
-                        @Html.DisplayName("KAHWIN & ISTERI/SUAMI BEKERJA")
-                    }
-            </dd>
+            </dd> 
             <dt class="col-sm-2">
                     @Html.DisplayNameFor(model => model.Bujang)
             </dt>

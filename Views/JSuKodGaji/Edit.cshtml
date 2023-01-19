@@ -19,6 +19,31 @@
         <hr class="mt-2"/>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div class="form-row ml-1">
+                    <div class="card mb-2 col-md-6">
+                        <div class="card-body pb-1 pt-1"> 
+                            <div class="form-group mb-0 mt-1">
+                                 <label class="control-label">Jenis</label>  
+                            </div>
+                            <div class="form-row ml-1">
+                                <div class="custom-control custom-radio col-md-4 ">
+                                   <input asp-for="FlJenis" class="radio-inline" id="jenis1" name="FlJenis" type="radio" value="0" checked/>
+                                   <label class="label" for="FlJenis">
+                                        Elaun
+                                    </label> 
+                               </div>
+                                <div class="custom-control custom-radio col-md-4">
+                                    <input asp-for="FlJenis" class="radio-inline" id="jenis2" name="FlJenis" type="radio" value="1" />
+                                    <label class="label" for="FlJenis">
+                                        Potongan
+                                    </label>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
                 <label asp-for="Kod" class="control-label"></label>
@@ -29,12 +54,6 @@
                 <label asp-for="Perihal" class="control-label"></label>
                 <input asp-for="Perihal" class="form-control form-control-sm text-uppercase"  />
                 <span asp-validation-for="Perihal" class="text-danger"></span>
-            </div>
-            <div class="form-group">  
-                <label asp-for="FlJenis" class="control-label"></label><div></div>
-                <input asp-for="FlJenis" class="radio-inline" id="jenis1" name="Fljenis" type="radio" value="0" /> ELAUN
-                <input asp-for="FlJenis" class="radio-inline" id="jenis2" name="Fljenis" type="radio" value="1" /> POTONGAN 
-                <span asp-validation-for="FlJenis" class="text-danger"></span>   
             </div>
             <hr />
             <div class="form-group">

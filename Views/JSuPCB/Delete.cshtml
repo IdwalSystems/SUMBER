@@ -21,19 +21,7 @@
         <hr class="mt-2"/>
             <p class="text-danger">Anda pasti untuk menghapuskan maklumat berikut?</p>
             <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.GajiAwal)
-            </dt>
-            <dd class="col-sm-10">
-                @Model.GajiAwal
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.GajiAkhir)
-            </dt>
-            <dd class="col-sm-10">
-                @Model.GajiAkhir
-            </dd>
-             <dt class="col-sm-2">
+                 <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.FlKategori)
             </dt>
             <dd class="col-sm-10" >
@@ -50,6 +38,18 @@
                     @Html.DisplayName("KAHWIN & ISTERI/SUAMI BEKERJA")
                 }
 
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.GajiAwal)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.GajiAwal
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.GajiAkhir)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.GajiAkhir
             </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Bujang)

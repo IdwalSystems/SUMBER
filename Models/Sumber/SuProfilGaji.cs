@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System;
 using SUMBER.Models.Helper;
 using SUMBER.Models.Modules;
+using System.Collections.Generic;
 
 namespace SUMBER.Models.Sumber
 {
@@ -16,10 +17,10 @@ namespace SUMBER.Models.Sumber
         public int SuPekerjaId { get; set; }
         [DisplayName("Kod Gaji")]
         public int JSuKodGajiId { get; set; }
-        [DisplayName("Elaun")]
+        [DisplayName("Elaun RM")]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Elaun { get; set; }
-        [DisplayName("Potongan")]
+        [DisplayName("Potongan RM")]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Potongan { get; set; }
         // note:

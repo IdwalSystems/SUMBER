@@ -28,9 +28,9 @@
                         <div class="col-sm-2 mb-2">
                             <select class="custom-select form-control-sm" id="columnSearch">
                                 <option value="" selected>Semua</option>
+                                <option value=".fljenis">Jenis</option>
                                 <option value=".kod">Kod</option>
                                 <option value=".perihal">Perihal</option>
-                                <option value=".fljenis">Jenis</option>
                             </select>
                         </div>
                         <div class="col-sm-8 mb-2">
@@ -46,14 +46,14 @@
                 <thead>
                     <tr>
                         <th width="5%">Bil</th>
+                         <th class="fljenis" width="10%">
+                            @Html.DisplayNameFor(model => model.FlJenis)
+                        </th> 
                         <th class="kod" width="5%">
                             @Html.DisplayNameFor(model => model.Kod)
                         </th>
                         <th class="perihal">
                             @Html.DisplayNameFor(model => model.Perihal)
-                        </th> 
-                        <th class="fljenis" width="10%">
-                            @Html.DisplayNameFor(model => model.FlJenis)
                         </th> 
                         <th width="5%"></th>
                     </tr> 
@@ -65,12 +65,6 @@
                             <tr class="@tabletype text-uppercase">
                                 <td></td>
                                 <td>
-                                @Html.DisplayFor(modelItem => item.Kod)
-                                </td>
-                                <td>
-                                @item.Perihal
-                                </td>
-                                <td>
                                 @if (item.FlJenis == 0)
                                 {
                                     @Html.DisplayName("ELAUN")
@@ -80,7 +74,12 @@
                                     @Html.DisplayName("POTONGAN")
                                 }
                                 </td>
-                                
+                                <td>
+                                @Html.DisplayFor(modelItem => item.Kod)
+                                </td>
+                                <td>
+                                @item.Perihal
+                                </td>
                                 <td width="5%" class="action-button text-center">
                                     <div class="btn-group" role="group" aria-label="action">
                                     @if (item.FlHapus == 0)

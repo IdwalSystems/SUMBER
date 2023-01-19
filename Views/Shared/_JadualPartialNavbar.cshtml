@@ -12,7 +12,10 @@
     @Html.ActiveClass("JNegeri")
     @Html.ActiveClass("JSuTarafJawatan")
     @Html.ActiveClass("JSuGredGaji")
-    @Html.ActiveClass("JSuKWSP")
+    @Html.ActiveClass("JSuKodGaji")
+    @Html.ActiveClass("JSuPCB")
+    @Html.ActiveClass("JSuKWSP") 
+    
     
     " href="#submenuJadual" data-toggle="collapse" data-target="#submenuJadual"><i class="fas fa-columns pr-2
     "></i><span class="pl-1">Jadual</span></a>
@@ -76,11 +79,46 @@
             <li class="nav-item"><a class="nav-link py-1 ml-3 @Html.ActiveSideBarClass("JSukan")" asp-area="" asp-controller="JSukan" asp-action="Index"><span>Sukan</span></a></li>
             <li class="nav-item"><a class="nav-link py-1 ml-3 @Html.ActiveSideBarClass("JTahapAktiviti")" asp-area="" asp-controller="JTahapAktiviti" asp-action="Index"><span>Tahap Aktiviti</span></a></li>
             <li class="nav-item"><a class="nav-link py-1 ml-3 @Html.ActiveSideBarClass("JNegeri")" asp-area="" asp-controller="JNegeri" asp-action="Index"><span>Negeri</span></a></li>
-            <li class="nav-item"><a class="nav-link py-1 ml-3 @Html.ActiveSideBarClass("JSuTarafJawatan")" asp-area="" asp-controller="JSuTarafJawatan" asp-action="Index"><span>Taraf Jawatan</span></a></li>
-            <li class="nav-item"><a class="nav-link py-1 ml-3 @Html.ActiveSideBarClass("JSuGredGaji")" asp-area="" asp-controller="JSuGredGaji" asp-action="Index"><span>Gred Gaji</span></a></li>
-            <li class="nav-item"><a class="nav-link py-1 ml-3 @Html.ActiveSideBarClass("JSuKodGaji")" asp-area="" asp-controller="JSuKodGaji" asp-action="Index"><span>Kod Gaji</span></a></li>
-            <li class="nav-item"><a class="nav-link py-1 ml-3 @Html.ActiveSideBarClass("JSuPCB")" asp-area="" asp-controller="JSuPCB" asp-action="Index"><span>PCB</span></a></li>
-            <li class="nav-item"><a class="nav-link py-1 ml-3 @Html.ActiveSideBarClass("JSuKWSP")" asp-area="" asp-controller="JSuKWSP" asp-action="Index"><span>KWSP</span></a></li>
+        
+             <li class="nav-item">
+                <a class="nav-link  text-truncate collapsed py-1 ml-3
+                @Html.ActiveClass("JSuTarafJawatan")
+                @Html.ActiveClass("JSuGredGaji")
+                @Html.ActiveClass("JSuKodGaji")
+                @Html.ActiveClass("JSuPCB")
+                @Html.ActiveClass("JSuKWSP") " href="#submenuJadualsub4" data-toggle="collapse" data-target="#submenuJadualsub4"><span>Sumber Manusia</span></a>
+                <div class="collapse" id="submenuJadualsub4" aria-expanded="false">
+                    <ul class="flex-column nav pl-4">
+                        <li class="nav-item">
+                            <a class="nav-link p-1 text-truncate pl-4 @Html.ActiveSideBarClass("JSuTarafJawatan")" asp-area="" asp-controller="JSuTarafJawatan" asp-action="Index">
+                                Taraf Jawatan
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link p-1 text-truncate pl-4 @Html.ActiveSideBarClass("JSuGredGaji")" asp-area="" asp-controller="JSuGredGaji" asp-action="Index">
+                                Gred Gaji
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link p-1 text-truncate pl-4 @Html.ActiveSideBarClass("JSuKodGaji")" asp-area="" asp-controller="JSuKodGaji" asp-action="Index">
+                                Kod Gaji
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link p-1 text-truncate pl-4 @Html.ActiveSideBarClass("JSuPCB")" asp-area="" asp-controller="JSuPCB" asp-action="Index">
+                                PCB
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link p-1 text-truncate pl-4 @Html.ActiveSideBarClass("JSuKWSP")" asp-area="" asp-controller="JSuKWSP" asp-action="Index">
+                                KWSP
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
         </ul>
     </div>
 </li>
+
+           

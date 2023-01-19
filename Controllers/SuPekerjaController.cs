@@ -32,6 +32,7 @@ namespace SUMBER.Controllers
         private readonly ListViewIRepository<SuTanggunganPekerja, int> _suTanggunganRepo;
         private readonly IRepository<JCaraBayar, int, string> _jCaraBayarRepo;
         private readonly IRepository<JSuTarafJawatan, int, string> _jSuTarafJawatanRepo;
+        private readonly IRepository<SuProfilGaji, int, string> _SuProfilGajiRepo;
         private CartPekerja _cart;
 
         public SuPekerjaController(
@@ -45,7 +46,8 @@ namespace SUMBER.Controllers
             ListViewIRepository<SuTanggunganPekerja, int> suTanggunganRepo,
             IRepository<JCaraBayar, int, string> jCaraBayarRepo,
             IRepository<JSuTarafJawatan, int, string> jSuTarafJawatanRepo,
-            CartPekerja cart
+            IRepository<SuProfilGaji, int, string> SuProfilGajiRepo,
+        CartPekerja cart
             )
         {
             _context = context;
@@ -58,6 +60,7 @@ namespace SUMBER.Controllers
             _suTanggunganRepo = suTanggunganRepo;
             _jCaraBayarRepo = jCaraBayarRepo;
             _jSuTarafJawatanRepo = jSuTarafJawatanRepo;
+            _SuProfilGajiRepo = SuProfilGajiRepo;
             _cart = cart;
         }
 
@@ -101,6 +104,9 @@ namespace SUMBER.Controllers
 
             List<JSuTarafJawatan> JSuTarafJawatanList = _context.JSuTarafJawatan.OrderBy(b => b.Kod).ToList();
             ViewBag.JSuTarafJawatan = JSuTarafJawatanList;
+
+            List<SuProfilGaji> SuProfilGajiList = _context.SuProfilGaji.OrderBy(b => b.JSuKodGajiId).ToList();
+            ViewBag.SuProfilGaji = SuProfilGajiList;
         }
 
         private string GetNoGaji()
@@ -248,7 +254,7 @@ namespace SUMBER.Controllers
                                     //m.JAgamaId = suPekerja.JAgamaId;
                                     //m.JBangsaId = suPekerja.JBangsaId;
                                     //m.JCaraBayarId = suPekerja.JCaraBayarId;
-                                    //m.JSuTarafJawatan = suPekerja.JSuTarafJawatan;
+                                    m.JSuTarafJawatan = suPekerja.JSuTarafJawatan;
                                     m.NoAkaunBank = suPekerja.NoAkaunBank;
                                     m.UserId = username;
                                     m.TarMasuk = DateTime.Now;
