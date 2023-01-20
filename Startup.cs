@@ -111,7 +111,7 @@ namespace SUMBER
             services.AddTransient<IRepository<JSuKodGaji, int, string>, JSuKodGajiRepository>();
             services.AddTransient<IRepository<JSuPCB, int, string>, JSuPCBRepository>();
             services.AddTransient<IRepository<JSuKWSP, int, string>, JSuKWSPRepository>();
-            services.AddTransient<IRepository<SuProfilGaji, int, string>, SuProfilGajiRepository>();
+            services.AddTransient<ListViewIRepository<SuProfilGaji, int>, SuProfilGajiRepository>();
 
             //TUNAI RUNCIT
             services.AddTransient<IRepository<AkTunaiRuncit, int, string>, AkTunaiRuncitRepository>();

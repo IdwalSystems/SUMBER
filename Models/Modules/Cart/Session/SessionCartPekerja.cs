@@ -39,5 +39,35 @@ namespace SUMBER.Models.Modules.Cart.Session
             base.Clear1();
             Session.Remove("CartPekerja");
         }
+
+        //ProfilGaji1
+        public override void AddItem2(
+            int suPekerjaId,
+            int jSuKodGajiId,
+            decimal elaun,
+            decimal potongan,
+            int flKWSP
+           )
+        {
+            base.AddItem2(suPekerjaId,
+                          jSuKodGajiId,
+                          elaun,
+                          potongan,
+                          flKWSP);
+
+            Session.SetJson("CartPekerja", this);
+        }
+
+        public override void RemoveItem2(int id)
+        {
+            base.RemoveItem2(id);
+            Session.SetJson("CartPekerja", this);
+        }
+        public override void Clear2()
+        {
+            base.Clear2();
+            Session.Remove("CartPekerja");
+        }
+        //ProfilGaji1 End
     }
 }

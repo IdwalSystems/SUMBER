@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace SUMBER.Models.Sumber
 {
-    public class SuProfilGaji : AppLogHelper, ISoftDelete
+    public class SuProfilGaji
     {
         //field
         public int Id { get; set; }
@@ -39,9 +39,5 @@ namespace SUMBER.Models.Sumber
         public JSuKodGaji JSuKodGaji { get; set; }
         //relationship end
 
-        //soft delete
-        public int FlHapus { get; set; }
-        public DateTime? TarHapus { get; set; }
-        //soft delete end
     }
 }

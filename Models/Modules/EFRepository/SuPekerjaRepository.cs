@@ -29,6 +29,7 @@ namespace SUMBER.Models.Modules.EFRepository
                 .Include(b => b.JCaraBayar)
                 .Include(b => b.JNegeri)
                 .Include(b => b.SuTanggungan)
+                .Include(b => b.SuProfilGaji).ThenInclude(b => b.JSuKodGaji)
                 .ToListAsync();
         }
 
@@ -41,6 +42,7 @@ namespace SUMBER.Models.Modules.EFRepository
                 .Include(b => b.JCaraBayar)
                 .Include(b => b.JNegeri)
                 .Include(b => b.SuTanggungan)
+                .Include(b => b.SuProfilGaji).ThenInclude(b => b.JSuKodGaji)
                 .ToListAsync();
         }
 
@@ -52,6 +54,7 @@ namespace SUMBER.Models.Modules.EFRepository
                 .Include(b => b.JCaraBayar)
                 .Include(b => b.JNegeri)
                 .Include(b => b.SuTanggungan)
+                .Include(b => b.SuProfilGaji).ThenInclude(b => b.JSuKodGaji)
                 .FirstOrDefaultAsync(x=> x.Id == id);
         }
 
@@ -64,6 +67,7 @@ namespace SUMBER.Models.Modules.EFRepository
                 .Include(b => b.JCaraBayar)
                 .Include(b => b.JNegeri)
                 .Include(b => b.SuTanggungan)
+                .Include(b => b.SuProfilGaji).ThenInclude(b => b.JSuKodGaji)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 

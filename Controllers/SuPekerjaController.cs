@@ -32,7 +32,7 @@ namespace SUMBER.Controllers
         private readonly ListViewIRepository<SuTanggunganPekerja, int> _suTanggunganRepo;
         private readonly IRepository<JCaraBayar, int, string> _jCaraBayarRepo;
         private readonly IRepository<JSuTarafJawatan, int, string> _jSuTarafJawatanRepo;
-        private readonly IRepository<SuProfilGaji, int, string> _SuProfilGajiRepo;
+        private readonly ListViewIRepository<SuProfilGaji, int> _suProfilGajiRepo;
         private CartPekerja _cart;
 
         public SuPekerjaController(
@@ -46,8 +46,8 @@ namespace SUMBER.Controllers
             ListViewIRepository<SuTanggunganPekerja, int> suTanggunganRepo,
             IRepository<JCaraBayar, int, string> jCaraBayarRepo,
             IRepository<JSuTarafJawatan, int, string> jSuTarafJawatanRepo,
-            IRepository<SuProfilGaji, int, string> SuProfilGajiRepo,
-        CartPekerja cart
+            ListViewIRepository<SuProfilGaji, int> suProfilGajiRepo,
+            CartPekerja cart
             )
         {
             _context = context;
@@ -60,7 +60,7 @@ namespace SUMBER.Controllers
             _suTanggunganRepo = suTanggunganRepo;
             _jCaraBayarRepo = jCaraBayarRepo;
             _jSuTarafJawatanRepo = jSuTarafJawatanRepo;
-            _SuProfilGajiRepo = SuProfilGajiRepo;
+            _suProfilGajiRepo = suProfilGajiRepo;
             _cart = cart;
         }
 
@@ -70,7 +70,7 @@ namespace SUMBER.Controllers
             string rujukan,
             int idRujukan,
             decimal jumlah,
-            int? pekerjaId )
+            int? pekerjaId)
         {
             var user = await _userManager.GetUserAsync(User);
             AppLog appLog = new AppLog();
@@ -107,6 +107,9 @@ namespace SUMBER.Controllers
 
             List<SuProfilGaji> SuProfilGajiList = _context.SuProfilGaji.OrderBy(b => b.JSuKodGajiId).ToList();
             ViewBag.SuProfilGaji = SuProfilGajiList;
+
+            List<JSuKodGaji> JSuKodGajiList = _context.JSuKodGaji.OrderBy(b => b.Kod).ToList();
+            ViewBag.JSuKodGaji = JSuKodGajiList;
         }
 
         private string GetNoGaji()
@@ -133,6 +136,16 @@ namespace SUMBER.Controllers
         {
             List<SuTanggunganPekerja> suTanggungan = _context.SuTanggunganPekerja.Where(b => b.SuPekerjaId == id).ToList();
             ViewBag.suTanggungan = suTanggungan;
+
+            //List<SuProfilGaji> suProfilGaji = _context.SuProfilGaji.Where(b => b.SuPekerjaId == id).ToList();
+            //ViewBag.suProfilGaji = suProfilGaji;
+
+            List<SuProfilGaji> table1 = _context.SuProfilGaji
+                .Include(b => b.JSuKodGaji)
+                .Where(b => b.SuPekerjaId == id)
+                .OrderBy(b => b.Id)
+                .ToList();
+            ViewBag.suProfilGaji = table1;
         }
 
         private JsonResult CartEmpty()
@@ -162,6 +175,21 @@ namespace SUMBER.Controllers
                     suT.NoKP
                     );
             }
+
+            List<SuProfilGaji> suProfilGaji = _context.SuProfilGaji
+                .Where(b => b.SuPekerjaId == suPekerja.Id)
+                .ToList();
+            foreach (SuProfilGaji suPG in suProfilGaji)
+            {
+                _cart.AddItem2(
+                    suPG.SuPekerjaId,
+                    suPG.JSuKodGajiId,
+                    suPG.Elaun,
+                    suPG.Potongan,
+                    suPG.FlKWSP
+                    );
+            }
+
         }
 
         [Authorize(Policy = "DF001")]
@@ -232,16 +260,16 @@ namespace SUMBER.Controllers
                                 if (suPekerja != null)
                                 {
                                     m.NoGaji = GetNoGaji();
-                                    m.Nama = suPekerja.Nama?.ToUpper()?? null;
+                                    m.Nama = suPekerja.Nama?.ToUpper() ?? null;
                                     m.NoKp = suPekerja.NoKp;
-                                    m.Alamat1 = suPekerja.Alamat1?.ToUpper()?? null;
-                                    m.Alamat2 = suPekerja.Alamat2?.ToUpper()?? null;
-                                    m.Alamat3 = suPekerja.Alamat3?.ToUpper()?? null;
+                                    m.Alamat1 = suPekerja.Alamat1?.ToUpper() ?? null;
+                                    m.Alamat2 = suPekerja.Alamat2?.ToUpper() ?? null;
+                                    m.Alamat3 = suPekerja.Alamat3?.ToUpper() ?? null;
                                     m.Poskod = suPekerja.Poskod;
-                                    m.Bandar = suPekerja.Bandar?.ToUpper()?? null;
+                                    m.Bandar = suPekerja.Bandar?.ToUpper() ?? null;
                                     m.JNegeriId = suPekerja.JNegeriId;
                                     m.JBankId = suPekerja.JBankId;
-                                    m.Jawatan = suPekerja.Jawatan?.ToUpper()?? null;
+                                    m.Jawatan = suPekerja.Jawatan?.ToUpper() ?? null;
                                     //m.TelefonRumah = suPekerja.TelefonRumah;
                                     //m.TelefonBimbit = suPekerja.TelefonBimbit;
                                     m.Emel = suPekerja.Emel;
@@ -261,11 +289,12 @@ namespace SUMBER.Controllers
                                     m.SuPekerjaMasukId = pekerjaId;
 
                                     m.SuTanggungan = _cart.Lines1.ToArray();
+                                    m.SuProfilGaji = _cart.Lines2.ToArray();
 
                                     await _suPekerjaRepo.Insert(m);
 
                                     //insert applog
-                                    await AddLogAsync("Tambah", m.NoGaji + " - " + suPekerja.NoKp,m.NoGaji,0, 0, pekerjaId);
+                                    await AddLogAsync("Tambah", m.NoGaji + " - " + suPekerja.NoKp, m.NoGaji, 0, 0, pekerjaId);
                                     //insert applog end
 
                                     //await AddLogAsync("Tambah", noRujukan, kredit);
@@ -291,7 +320,7 @@ namespace SUMBER.Controllers
                 {
                     TempData[SD.Error] = "No Akaun ini telah wujud..!";
                 }
-                
+
             }
             else
             {
@@ -357,15 +386,26 @@ namespace SUMBER.Controllers
                     // list of input that cannot be change end
 
                     // list of input to uppercase
-                    suPekerja.Nama = suPekerja.Nama?.ToUpper()?? null;
-                    suPekerja.Alamat1 = suPekerja.Alamat1?.ToUpper()?? null;
-                    suPekerja.Alamat2 = suPekerja.Alamat2?.ToUpper()?? null;
-                    suPekerja.Alamat3 = suPekerja.Alamat3?.ToUpper()?? null;
-                    suPekerja.Bandar = suPekerja.Bandar?.ToUpper()?? null;
-                    suPekerja.Jawatan = suPekerja.Jawatan?.ToUpper()?? null;
+                    suPekerja.Nama = suPekerja.Nama?.ToUpper() ?? null;
+                    suPekerja.Alamat1 = suPekerja.Alamat1?.ToUpper() ?? null;
+                    suPekerja.Alamat2 = suPekerja.Alamat2?.ToUpper() ?? null;
+                    suPekerja.Alamat3 = suPekerja.Alamat3?.ToUpper() ?? null;
+                    suPekerja.Bandar = suPekerja.Bandar?.ToUpper() ?? null;
+                    suPekerja.Jawatan = suPekerja.Jawatan?.ToUpper() ?? null;
                     // list of input to uppercase end
 
+                    foreach (SuProfilGaji item in dataAsal.SuProfilGaji)
+                    {
+                        var model = _context.SuProfilGaji.FirstOrDefault(b => b.Id == item.Id);
+                        if (model != null)
+                        {
+                            _context.Remove(model);
+                        }
+                    }
+                    await _context.SaveChangesAsync();
                     _context.Entry(dataAsal).State = EntityState.Detached;
+
+                    suPekerja.SuProfilGaji = _cart.Lines2.ToList();
 
                     suPekerja.UserIdKemaskini = user.UserName;
                     suPekerja.TarKemaskini = DateTime.Now;
@@ -377,11 +417,11 @@ namespace SUMBER.Controllers
                     if (namaAsal != suPekerja.Nama || noAkaunAsal != suPekerja.NoAkaunBank)
                     {
                         await AddLogAsync("Ubah", namaAsal + " -> " + suPekerja.Nama
-                            + ", " + noAkaunAsal + " -> " + suPekerja.NoAkaunBank,suPekerja.NoGaji,id, 0, pekerjaId);
+                            + ", " + noAkaunAsal + " -> " + suPekerja.NoAkaunBank, suPekerja.NoGaji, id, 0, pekerjaId);
                     }
                     else
                     {
-                        await AddLogAsync("Ubah", "Ubah Data", suPekerja.NoGaji,id, 0, pekerjaId);
+                        await AddLogAsync("Ubah", "Ubah Data", suPekerja.NoGaji, id, 0, pekerjaId);
                     }
                     //insert applog end
 
@@ -398,11 +438,13 @@ namespace SUMBER.Controllers
                         throw;
                     }
                 }
+                CartEmpty();
                 TempData[SD.Success] = "Data berjaya diubah..!";
                 return RedirectToAction(nameof(Index));
 
             }
             PopulateList();
+            PopulateTable(id);
             return View(suPekerja);
         }
 
@@ -441,7 +483,7 @@ namespace SUMBER.Controllers
             suPekerja.SuPekerjaKemaskiniId = pekerjaId;
 
             _context.SuPekerja.Remove(suPekerja);
-            await AddLogAsync("Hapus", suPekerja.NoKp + " - " + suPekerja.NoAkaunBank, suPekerja.NoGaji,id, 0, pekerjaId);
+            await AddLogAsync("Hapus", suPekerja.NoKp + " - " + suPekerja.NoAkaunBank, suPekerja.NoGaji, id, 0, pekerjaId);
             await _context.SaveChangesAsync();
             TempData[SD.Success] = "Data berjaya dihapuskan..!";
             return RedirectToAction(nameof(Index));
@@ -655,5 +697,186 @@ namespace SUMBER.Controllers
             return _context.SuPekerja.Any(e => e.Emel == kod);
         }
 
+        // function  json Create
+        public JsonResult GetCarta(int id)
+        {
+            try
+            {
+                var result = _context.JSuKodGaji.Where(b => b.ID == id).FirstOrDefault();
+
+                //var bahagian = _context.JBahagian.FirstOrDefault(b => b.Id == id2);
+
+                return Json(new { result = "OK", record = result });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "Error", message = ex.Message });
+            }
+
+        }
+
+        public JsonResult SaveSuProfilGaji(
+            SuProfilGaji suProfilGaji,
+            int suPekerjaId,
+            int jSuKodGajiId,
+            decimal elaun,
+            decimal potongan,
+            int flKWSP)
+        {
+
+            try
+            {
+                if (suProfilGaji != null)
+                {
+
+                    var cart = _cart.Lines2
+                        .FirstOrDefault(b => b.JSuKodGajiId == suProfilGaji.JSuKodGajiId);
+
+                    if (cart != null)
+                    {
+                        return Json(new { result = "ERROR", message = "Kod Gaji telah wujud." });
+                    }
+                    _cart.AddItem2(suProfilGaji.SuPekerjaId,
+                                suProfilGaji.JSuKodGajiId,
+                                suProfilGaji.Elaun,
+                                suProfilGaji.Potongan,
+                                suProfilGaji.FlKWSP
+                                );
+
+                }
+
+                return Json(new { result = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "ERROR", message = ex.Message });
+            }
+        }
+
+        public JsonResult RemoveSuProfilGaji(SuProfilGaji suProfilGaji)
+        {
+
+            try
+            {
+                if (suProfilGaji != null)
+                {
+
+                    _cart.RemoveItem2(suProfilGaji.JSuKodGajiId);
+                }
+
+                return Json(new { result = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "ERROR", message = ex.Message });
+            }
+        }
+
+        // get an item from cart suProfilGaji
+        public JsonResult GetAnItemCartSuProfilGaji(SuProfilGaji suProfilGaji)
+        {
+
+            try
+            {
+                SuProfilGaji data = _cart.Lines2.Where(x => x.JSuKodGajiId == suProfilGaji.JSuKodGajiId).FirstOrDefault();
+
+                return Json(new { result = "OK", record = data });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "ERROR", message = ex.Message });
+            }
+        }
+        // get an item from cart SuProfilGaji end
+
+        //save cart SuProfilGaji
+        public JsonResult SaveCartSuProfilGaji(
+            SuProfilGaji suProfilGaji
+            )
+        {
+            try
+            {
+
+                var suPG = _cart.Lines2.Where(x => x.JSuKodGajiId == suProfilGaji.JSuKodGajiId).FirstOrDefault();
+
+                if (suPG != null)
+                {
+
+                    _cart.RemoveItem2(suPG.JSuKodGajiId);
+
+                    _cart.AddItem2(suProfilGaji.SuPekerjaId,
+                                    suProfilGaji.JSuKodGajiId,
+                                    suProfilGaji.Elaun,
+                                    suProfilGaji.Potongan,
+                                    suProfilGaji.FlKWSP
+                                    );
+                }
+
+                return Json(new { result = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "ERROR", message = ex.Message });
+            }
+        }
+        //save cart akPOLaras1 end
+
+        // get all item from cart akPOLaras1
+        public JsonResult GetAllItemCartSuProfilGaji()
+        {
+
+            try
+            {
+                List<SuProfilGaji> data = _cart.Lines2.ToList();
+
+                foreach (SuProfilGaji item in data)
+                {
+                    var jSuKodGaji = _context.JSuKodGaji.Find(item.JSuKodGajiId);
+
+                    item.JSuKodGaji = jSuKodGaji;
+
+                }
+
+                return Json(new { result = "OK", record = data });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "ERROR", message = ex.Message });
+            }
+        }
+        // get all item from cart akPOLaras1 end
+
+        // json empty Cart controller
+        [HttpPost]
+        public JsonResult JsonEmptyCart1()
+        {
+            try
+            {
+                CartEmpty1();
+
+                return Json(new { result = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "Error", message = ex.Message });
+            }
+        }
+        // json empty cart end
+
+        public JsonResult CartEmpty1()
+        {
+            try
+            {
+                _cart.Clear2();
+
+                return Json(new { result = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "ERROR", message = ex.Message });
+            }
+        }
+
     }
+
 }

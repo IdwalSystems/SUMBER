@@ -19,7 +19,7 @@
             </div>
 
         </div>
-        <hr class="mt-2"/>
+        <hr class="mt-2" />
         <div class="card mb-2">
             <div class="card-body pl-3 pb-2">
                 <label class="form-control-plaintext" for="columnSearch">Carian : </label>
@@ -28,8 +28,10 @@
                         <div class="col-sm-2 mb-2">
                             <select class="custom-select form-control-sm" id="columnSearch">
                                 <option value="" selected>Semua</option>
-                                <option value=".gajiawal">Gaji Awal</option>
-                                <option value=".gajiakhir">Gaji Akhir</option>
+                                <option value=".gajiawal">Gaji Awal(RM)</option>
+                                <option value=".gajiakhir">Gaji Akhir(RM)</option>
+                                <option value=".potongpekerja">Potong Pekerja(RM)</option>
+                                <option value=".potongmajikan">Potong Majikan(RM)</option>
                             </select>
                         </div>
                         <div class="col-sm-8 mb-2">
@@ -45,9 +47,6 @@
                 <thead>
                     <tr>
                         <th width="5%">Bil</th>
-                        @*<th class="id" width="5%">
-                            @Html.DisplayNameFor(model => model.Id)
-                        </th>*@
                         <th class="gajiawal">
                             @Html.DisplayNameFor(model => model.GajiAwal)
                         </th>
@@ -60,56 +59,61 @@
                         <th class="potongmajikan">
                             @Html.DisplayNameFor(model => model.PotongMajikan)
                         </th>
+                        <th class="jumlahcaruman">
+                            @Html.DisplayNameFor(model => model.JumlahCaruman)
+                        </th>
                         <th width="5%"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
+                        //jumlah caruman
+                        var total = item.PotongPekerja + item.PotongMajikan;
                         var tabletype = item.FlHapus == 1 ? "table-danger" : null;
-                                <tr class="@tabletype text-uppercase">
-                                    <td></td>
-                                    <td>
+                        <tr class="@tabletype text-uppercase">
+                            <td></td>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.GajiAwal)
-                                    </td>
-                                    @*<td>
-                                @item.GajiAwal
-                                    </td>*@
-                                    <td>
+                            </td>
+                            <td>
                                 @item.GajiAkhir
-                                    </td>
-                                    <td>
+                            </td>
+                            <td>
                                 @item.PotongPekerja
-                                    </td>
-                                    <td>
+                            </td>
+                            <td>
                                 @item.PotongMajikan
-                                    </td>
-                                    <td width="5%" class="action-button text-center">
-                                        <div class="btn-group" role="group" aria-label="action">
+                            </td>
+                            <td>
+                                @Html.DisplayFor(JumlahCaruman => total)
+                            </td>
+                            <td width="5%" class="action-button text-center">
+                                <div class="btn-group" role="group" aria-label="action">
                                     @if (item.FlHapus == 0)
                                     {
-                                                        <a asp-action="Details" asp-route-id="@item.Id"
-                                            class="btn text-primary btn-sm bg-white" type="button"
-                                            data-toggle="tooltip" data-placement="top"
-                                            title="Ubah/Papar"><i class="fas fa-edit"></i></a>
-                                                        <a asp-action="Delete" asp-route-id="@item.Id"
-                                            class="btn text-danger btn-sm bg-white" type="button"
-                                            data-toggle="tooltip" data-placement="top"
-                                            title="Hapus"><i class="fas fa-trash"></i></a>
+                                        <a asp-action="Details" asp-route-id="@item.Id"
+                                   class="btn text-primary btn-sm bg-white" type="button"
+                                   data-toggle="tooltip" data-placement="top"
+                                   title="Ubah/Papar"><i class="fas fa-edit"></i></a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id"
+                                   class="btn text-danger btn-sm bg-white" type="button"
+                                   data-toggle="tooltip" data-placement="top"
+                                   title="Hapus"><i class="fas fa-trash"></i></a>
                                     }
                                     else
                                     {
                                         if (User.IsInRole("SuperAdmin"))
                                         {
-                                                                    <a asp-action="Rollback" asp-route-id="@item.Id" class="btn text-info btn-sm bg-white" type="button" data-toggle="tooltip" data-placement="top" title="Rollback">
-                                                                        <i class="fas fa-trash-restore"></i>
-                                                                    </a>
+                                            <a asp-action="Rollback" asp-route-id="@item.Id" class="btn text-info btn-sm bg-white" type="button" data-toggle="tooltip" data-placement="top" title="Rollback">
+                                                <i class="fas fa-trash-restore"></i>
+                                            </a>
 
                                         }
                                     }
-                                        </div>
-                                    </td>
-                                </tr>
+                                </div>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>

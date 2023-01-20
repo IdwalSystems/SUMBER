@@ -13,21 +13,26 @@ namespace SUMBER.Models.Sumber
         //field
         public int Id { get; set; }
 
-        [DisplayName("Gaji Awal")]
+        [DisplayName("Gaji Awal (RM)")]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal GajiAwal { get; set; }
 
-        [DisplayName("Gaji Akhir")]
+        [DisplayName("Gaji Akhir (RM)")]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal GajiAkhir { get; set; }
 
-        [DisplayName("Potong Pekerja")]
+        [DisplayName("Potong Pekerja (RM)")]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal PotongPekerja { get; set; }
 
-        [DisplayName("Potong Majikan")]
+        [DisplayName("Potong Majikan (RM)")]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal PotongMajikan { get; set; }
+
+        [DisplayName("Jumlah Caruman (RM)")]
+        [Column(TypeName = "decimal(18, 2)")]
+        [NotMapped]
+        public decimal JumlahCaruman { get; set; }
 
         //field end
 
