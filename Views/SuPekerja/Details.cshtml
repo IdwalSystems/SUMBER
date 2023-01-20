@@ -84,19 +84,20 @@
                         <thead>
                             <tr>
                                 <th hidden>Id</th>
-                                <th style="width:40%%">Kod Perihalan</th>
-                                <th style="width:40%%">Elaun RM</th>
-                                <th style="width:40%%">Potongan RM</th>
-                                <th style="width:40%%">KWSP</th>
+                                <th style="width:40%">Kod Perihalan</th>
+                                <th style="width:40%">Elaun RM</th>
+                                <th style="width:40%">Potongan RM</th>
+                                <th style="width:40%">KWSP</th>
                             </tr>
                         </thead>
                         <tbody id="tbodyObjek">
-
+                              
                                     @foreach (var item in ViewBag.SuProfilGaji)
                                     {
                                         <tr id="@item.Id">
-                                        <td id="JSuKodGajiId" hidden>@item.JSuKodGajiId</td>
-                                        <td>@item.JSuKodGaji</td>
+
+                                        <td id="JSuKodGajiId" hidden>@item.JSuKodGajiId</td>                                      
+                                        <td>@item.JSuKodGaji.Kod - @item.JSuKodGaji.Perihal</td>
                                         <td id="SuPekerjaId" hidden>@item.SuPekerjaId</td>
                                         <td>@item.Elaun</td>
                                         <td id="SuPekerjaId" hidden>@item.SuPekerjaId</td>
@@ -112,7 +113,6 @@
                                                     @Html.DisplayName("YA")
                                                 }
                                     </td>
-
                                     </tr>
                                     }
                         </tbody>
@@ -141,7 +141,7 @@
                     <div class="form-group col-md">
                         <label asp-for="StatusKahwin" class="control-label"></label>
                         <input class="form-control form-control-sm" value="@Html.DisplayFor(model => model.StatusKahwin)" readonly />
-                     <dd class="col-sm-10" >
+                     <div class="col-sm-10" >
                             @if (Model.StatusKahwin == 0)
                             {
                                 @Html.DisplayName("BUJANG")
@@ -151,7 +151,7 @@
                                 @Html.DisplayName("KAHWIN")
                             }
 
-                    </dd>
+                    </div>
                     </div>
                 </div>
                 <div class="form-row " hidden>

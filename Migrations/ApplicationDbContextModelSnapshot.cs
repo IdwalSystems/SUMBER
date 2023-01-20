@@ -354,13 +354,16 @@ namespace SUMBER.Migrations
                     b.Property<int>("FlHapus")
                         .HasColumnType("int");
 
+                    b.Property<int>("FlJenisPindahan")
+                        .HasColumnType("int");
+
                     b.Property<int>("FlJenisWaran")
                         .HasColumnType("int");
 
                     b.Property<int>("FlPosting")
                         .HasColumnType("int");
 
-                    b.Property<int>("JBahagianId")
+                    b.Property<int?>("JBahagianId")
                         .HasColumnType("int");
 
                     b.Property<int>("JKWId")
@@ -430,6 +433,9 @@ namespace SUMBER.Migrations
                     b.Property<decimal>("Amaun")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("JBahagianId")
+                        .HasColumnType("int");
+
                     b.Property<string>("TK")
                         .HasMaxLength(1)
                         .HasColumnType("nvarchar(1)");
@@ -439,6 +445,8 @@ namespace SUMBER.Migrations
                     b.HasIndex("AbWaranId");
 
                     b.HasIndex("AkCartaId");
+
+                    b.HasIndex("JBahagianId");
 
                     b.ToTable("AbWaran1");
                 });
@@ -4957,8 +4965,8 @@ namespace SUMBER.Migrations
 
                     b.Property<string>("Kod")
                         .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
 
                     b.Property<string>("Perihal")
                         .IsRequired()
@@ -5098,9 +5106,6 @@ namespace SUMBER.Migrations
                     b.Property<decimal>("Elaun")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("FlHapus")
-                        .HasColumnType("int");
-
                     b.Property<int>("FlKWSP")
                         .HasColumnType("int");
 
@@ -5112,27 +5117,6 @@ namespace SUMBER.Migrations
 
                     b.Property<int>("SuPekerjaId")
                         .HasColumnType("int");
-
-                    b.Property<int?>("SuPekerjaKemaskiniId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SuPekerjaMasukId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("TarHapus")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TarKemaskini")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("TarMasuk")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserIdKemaskini")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -5258,8 +5242,7 @@ namespace SUMBER.Migrations
                     b.HasOne("SUMBER.Models.Modules.JBahagian", "JBahagian")
                         .WithMany("AbWaran")
                         .HasForeignKey("JBahagianId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SUMBER.Models.Modules.JKW", "JKW")
                         .WithMany("AbWaran")
@@ -5286,7 +5269,13 @@ namespace SUMBER.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SUMBER.Models.Modules.JBahagian", "JBahagian")
+                        .WithMany("AbWaran1")
+                        .HasForeignKey("JBahagianId");
+
                     b.Navigation("AkCarta");
+
+                    b.Navigation("JBahagian");
                 });
 
             modelBuilder.Entity("SUMBER.Models.Modules.AkAkaun", b =>
@@ -6776,7 +6765,7 @@ namespace SUMBER.Migrations
                         .IsRequired();
 
                     b.HasOne("SUMBER.Models.Modules.SuPekerja", "SuPekerja")
-                        .WithMany()
+                        .WithMany("SuProfilGaji")
                         .HasForeignKey("SuPekerjaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -7023,6 +7012,8 @@ namespace SUMBER.Migrations
 
                     b.Navigation("AbWaran");
 
+                    b.Navigation("AbWaran1");
+
                     b.Navigation("AkAkaun");
 
                     b.Navigation("AkBank");
@@ -7216,6 +7207,8 @@ namespace SUMBER.Migrations
                     b.Navigation("JPenyemak");
 
                     b.Navigation("SpPendahuluanPelbagai");
+
+                    b.Navigation("SuProfilGaji");
 
                     b.Navigation("SuTanggungan");
                 });
